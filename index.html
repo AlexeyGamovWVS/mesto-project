@@ -10,7 +10,57 @@
 	<link rel="shortcut icon" href="./images/favicon.svg" type="image/x-icon">
 	<link rel="stylesheet" href="./pages/index.css">
 </head>
-<body>
+
+<body class="page">
+	<header class="header">
+		<div class="header__container">
+			<a href="/" class="header__logo-box link-animation">
+				<img src="./images/logo.svg" alt="Логтип «Место.">
+			</a>
+			<div class="header__divider"></div>
+		</div>
+	</header>
+
+	<main class="content">
+		<section class="profile">
+			<div class="profile__container">
+				<div class="profile__author-box">
+					<img src="./images/жак-ив-кусто.jpeg" alt="Автор: Жак Ив Кусто" class="profile__photo">
+					<div class="profile__description">
+						<div class="profile__title">
+							<h1 class="profile__name">Жак-Ив Кусто</h1>
+							<button class="profile__btn_type_edit">
+								<img src="./images/Edit Button.svg" alt="Редактировать." class="profile__btn-edit-icon">
+							</button>
+						</div>
+						<p class="profile__status">Исследователь океана</p>
+					</div>
+				</div>
+				<button class="profile__btn_type_add">+</button>
+			</div>
+		</section>
+		<section class="posts">
+			<ul class="posts__comtainer">
+				<li class="posts__post">
+					<div class="posts__img-box">
+						<img src="./images/Карачаевск.jpeg" alt="Карачаевск. Вид на старую крепость на холме крупным планом." class="posts__img">
+					</div>
+					<div class="posts__description-row">
+						<p class="posts__name">Карачаевск</p>
+						<button class="posts__btn_type_like">
+							<img src="./images/like.svg" alt="Нравится." class="posts__btn-like-icon">
+						</button>
+					</div>
+				</li>
+			</ul>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<div class="footer__container">
+			<p class="footer__copyright">© 2020 Mesto Russia</p>
+		</div>
+	</footer>
 	
 </body>
 </html>
