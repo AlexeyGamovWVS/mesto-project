@@ -1,2 +1,92 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts.css);
+@import url(../blocks/page/page.css);
+
+
+.header {
+	padding: 45px 0 20px;
+}
+
+.header__container {
+	max-width: 1280px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.header__logo-box {
+	text-decoration: none;
+}
+
+.logo {
+	object-fit: contain;
+}
+
+.header__logo {
+	width: 142px;
+	height: 33px;
+}
+
+.link-animation {
+	transition: opacity .3s ease;
+	-moz-transition: opacity .3s ease;
+	-o-transition: opacity .3s ease;
+	-webkit-transition: opacity .3s ease;
+}
+.link__animation:hover {
+	opacity: .6;
+}
+
+.header__divider {
+	margin-top: 40px;
+	width: 100%;
+	height: 1px;
+	background-color: #545454;
+}
+
+.profile {
+	padding: 20px 0 25px;
+}
+.profile__container {
+	max-width: 1280px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.profile__author-box {
+}
+.profile__photo {
+}
+.profile__description {
+}
+.profile__title {
+}
+.profile__name {
+}
+.profile__btn_type_edit {
+}
+.profile__btn-edit-icon {
+}
+.profile__status {
+}
+.profile__btn_type_add {
+}
+.posts {
+}
+.posts__comtainer {
+}
+.posts__post {
+}
+.posts__img-box {
+}
+.posts__img {
+}
+.posts__description-row {
+}
+.posts__name {
+}
+.posts__btn_type_like {
+}
+.posts__btn-like-icon {
+}
