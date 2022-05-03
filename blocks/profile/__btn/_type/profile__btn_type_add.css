@@ -3,3 +3,14 @@
 	border: 2px solid #FFFFFF;
 	border-radius: 2px;
 }
+
+@media screen and (max-width: 640px) {
+	.profile__btn_type_add {
+		padding: 17px 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		max-width: 320px;
+	}
+}

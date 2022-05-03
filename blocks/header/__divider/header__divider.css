@@ -4,3 +4,9 @@
 	height: 1px;
 	background-color: #545454;
 }
+
+@media screen and (max-width: 960px) {
+	.header__divider{
+		margin-top: 32px;
+	}
+}
