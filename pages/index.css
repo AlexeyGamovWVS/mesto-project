@@ -37,3 +37,151 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__container/footer__container.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+
+.popup {
+	align-items: center;
+  justify-content: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99999;
+	display: none;
+	width: 100%;
+	min-width: 320px;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .5);
+}
+
+.popup_opened {
+	display: flex;
+}
+.popup__container {
+	position: relative;
+	max-width: 430px;
+  width: 100%;
+}
+
+@media screen and (max-width: 640px) {
+	.popup__container {
+		padding: 0 19px;
+	}
+}
+
+
+.popup__btn-close {
+	background-color: transparent;
+	cursor: pointer;
+	align-items: center;
+	border: none;
+	margin: 0;
+	padding: 0;
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	right: -40px;
+	top: -40px;
+}
+
+@media screen and (max-width: 640px) {
+	.popup__btn-close {
+		width: 20px;
+		height: 20px;
+		top: -28px;
+		right: 20px;
+	}
+}
+
+.popup__close-icon {
+	width: 100%;
+}
+
+.form {
+	background: #fff;
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, .15);
+	border-radius: 10px;
+	padding: 34px 36px 37px;
+}
+
+@media screen and (max-width: 640px) {
+	.form {
+		padding: 25px 22px;
+	}
+}
+
+.form__container {
+	display: flex;
+	flex-direction: column;
+}
+
+.form__title {
+	margin: 0;
+	font-weight: 900;
+	font-size: 24px;
+	line-height: 29px;
+	color: black;
+}
+
+@media screen and (max-width: 640px) {
+	.form__title {
+		font-size: 18px;
+		line-height: 22px;
+	}
+}
+
+.form__input-container {
+	padding: 18px 0 48px;
+}
+
+@media screen and (max-width: 640px) {
+	.form__input-container {
+		padding: 75px 0 45px;
+	}
+}
+
+.form__item {
+	width: 100%;
+	border: none;
+	outline: none;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  margin-top: 30px;
+	padding: 0 0 10px;
+	color: black;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+}
+
+.form__item::placeholder {
+	color: rgba(0,0,0,.6);
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+}
+
+.form__item:focus {
+	border: none;
+  border-bottom: 1px solid rgba(0,0,0,.6);
+}
+
+.form__item:focus-visible {
+	border: none;
+  border-bottom: 1px solid rgba(0,0,0,.6);
+}
+
+.form__btn-save {
+	cursor: pointer;
+	border: none;
+	padding: 14px 28px;
+	background-color: black;
+	color: #fff;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
+}
+
+@media screen and (max-width: 640px) {
+	.form__btn-save {
+		font-size: 14px;
+		line-height: 17px;
+	}
+}

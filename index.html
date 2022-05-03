@@ -29,7 +29,7 @@
 					<div class="profile__description">
 						<div class="profile__title">
 							<h1 class="profile__name">Жак-Ив Кусто</h1>
-							<button class="profile__btn profile__btn_type_edit link-animation">
+							<button id="edit-profile" class="profile__btn profile__btn_type_edit link-animation">
 								<img src="./images/Edit Button.svg" alt="Редактировать." class="profile__btn-edit-icon">
 							</button>
 						</div>
@@ -106,6 +106,32 @@
 			<p class="footer__copyright">© 2020 Mesto Russia</p>
 		</div>
 	</footer>
+
+	<section id="edit-profile-popup" class="popup">
+		<div class="popup__container">
+			<button id="close-edit-profile" class="popup__btn-close link-animation"><img src="./images/Close Icon.svg" alt="Закрыть окно." class="popup__close-icon"></button>
+			<form action="" class="form">
+				<div class ="form__container">
+					<h2 class="form__title">Редактировать профиль</h2>
+					<feildset class="form__input-container">
+						<input name="name" id="author" class="form__item form__item_el_author" type="text" placeholder="Введите имя профиля">
+						<input name="status" id="status" class="form__item form__item_el_status" type="text" placeholder="Краткое описание профиля">
+					</feildset>
+					<button type="submit" class="form__btn-save link-animation">Сохранить</button>
+				</div>
+			</form>
+		</div>
+	</section>
 	
+	<script>
+		document.getElementById('edit-profile').onclick = function() {
+  		document.getElementById('edit-profile-popup').classList.add('popup_opened');
+		}
+
+		document.getElementById('close-edit-profile').onclick = function() {
+  		document.getElementById('edit-profile-popup').classList.remove('popup_opened');
+		}
+	</script>
+
 </body>
 </html>
