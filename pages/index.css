@@ -30,10 +30,11 @@
 .link-animation {
 	transition: opacity .3s ease;
 	-moz-transition: opacity .3s ease;
-	-o-transition: opacity .3s ease;
 	-webkit-transition: opacity .3s ease;
+	-o-transition: opacity .3s ease;
 }
-.link__animation:hover {
+
+.link-animation:hover {
 	opacity: .6;
 }
 
@@ -55,22 +56,66 @@
 	align-items: center;
 }
 .profile__author-box {
+	display: flex;
+	align-items: center;
 }
 .profile__photo {
+	display: block;
+	border-radius: 100%;
+	width: 120px;
+	margin-right: 30px;
 }
 .profile__description {
+	display: flex;
+	flex-direction: column;
 }
 .profile__title {
+	display: flex;
+	align-items:baseline;
 }
 .profile__name {
+	margin: 0 18px 0 0;
+	font-weight: 500;
+	font-size: 42px;
+	line-height: 48px;
+	color: #fff;
 }
-.profile__btn_type_edit {
-}
-.profile__btn-edit-icon {
-}
+
 .profile__status {
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
+	color: #FFFFFF;
+	margin: 7px 0 0;
 }
+
+.profile__btn {
+	background-color: transparent;
+	cursor: pointer;
+	align-items: center;
+	border: none;
+}
+
 .profile__btn_type_add {
+	padding: 14px 64px;
+	border: 2px solid #FFFFFF;
+	border-radius: 2px;
+}
+
+.profile__btn_type_edit {
+	width: 24px;
+	height: 24px;
+	padding: 0;
+}
+
+.profile__btn-edit-icon {
+	display: block;
+	object-fit: contain;
+}
+
+.profile__btn-add-icon {
+	display: block;
+	width: 22px;
 }
 .posts {
 }
