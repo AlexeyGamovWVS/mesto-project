@@ -8,7 +8,7 @@
 }
 
 .header__container {
-	max-width: 1280px;
+	max-width: 880px;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
@@ -49,7 +49,7 @@
 	padding: 20px 0 25px;
 }
 .profile__container {
-	max-width: 1280px;
+	max-width: 880px;
 	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
@@ -66,6 +66,7 @@
 	margin-right: 30px;
 }
 .profile__description {
+	max-width: 400px;
 	display: flex;
 	flex-direction: column;
 }
@@ -79,6 +80,10 @@
 	font-size: 42px;
 	line-height: 48px;
 	color: #fff;
+	text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
 }
 
 .profile__status {
@@ -87,6 +92,9 @@
 	line-height: 22px;
 	color: #FFFFFF;
 	margin: 7px 0 0;
+	text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__btn {
@@ -118,20 +126,82 @@
 	width: 22px;
 }
 .posts {
+	padding: 25px 0 33px;
 }
-.posts__comtainer {
+.posts__container {
+	max-width: 880px;
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(282px, 282px));
+	grid-template-rows: repeat(auto-fit, minmax(360px, 360px));
+	grid-auto-rows: 360px;
+	column-gap: 17px;
+	row-gap: 20px;
 }
 .posts__post {
+	padding: 0;
+	border-radius: 10px;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
 }
 .posts__img-box {
+	height: 282px;
+	overflow: hidden;
 }
 .posts__img {
+	width: 100%;
+	object-fit: cover;
+	object-position: center;
 }
+
 .posts__description-row {
+	height: 78px;
+	display: flex;
+	padding: 0 20px;
+	align-items: baseline;
+	justify-content: space-between;
 }
+
 .posts__name {
+	text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+	max-width: 200px;
+	font-weight: 900;
+	font-size: 24px;
+	line-height: 29px;
+	color: #000000;
 }
-.posts__btn_type_like {
+
+.posts__btn-like {
+	background-color: transparent;
+	cursor: pointer;
+	align-items: center;
+	border: none;
+	width: 22px;
+	height: 19px;
+	padding: 0;
+	background: url(../images/like.svg) center no-repeat;
 }
-.posts__btn-like-icon {
+
+.posts__btn-like_active {
+	background: url(../images/like-active.svg)
+}
+
+.footer {
+	padding: 33px 0 60px;
+}
+.footer__container {
+	max-width: 880px;
+	margin: 0 auto;
+}
+.footer__copyright {
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
+	color: #545454;	
 }
