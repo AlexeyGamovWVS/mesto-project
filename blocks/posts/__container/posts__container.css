@@ -1,0 +1,12 @@
+.posts__container {
+	max-width: 880px;
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(282px, 282px));
+	grid-template-rows: repeat(auto-fit, minmax(360px, 360px));
+	grid-auto-rows: 360px;
+	column-gap: 17px;
+	row-gap: 20px;
+}

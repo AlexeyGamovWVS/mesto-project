@@ -10,4 +10,5 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
 	background-color: black;
+	min-width: 320px;
 }
