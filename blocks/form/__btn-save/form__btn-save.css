@@ -1,6 +1,7 @@
 .form__btn-save {
 	cursor: pointer;
 	border: none;
+	border-radius: 2px;
 	padding: 14px 28px;
 	background-color: black;
 	color: #fff;
