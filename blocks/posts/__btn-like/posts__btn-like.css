@@ -7,4 +7,12 @@
 	height: 19px;
 	padding: 0;
 	background: url(../../../images/like.svg) center no-repeat;
+	transition: opacity .3s ease;
+	-moz-transition: opacity .3s ease;
+	-webkit-transition: opacity .3s ease;
+	-o-transition: opacity .3s ease;
+}
+
+.posts__btn-like:hover {
+	opacity: .5;
 }
