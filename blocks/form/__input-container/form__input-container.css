@@ -1,7 +1,6 @@
 .form__input-container {
 	padding: 18px 0 48px;
 }
-
 @media screen and (max-width: 640px) {
 	.form__input-container {
 		padding: 75px 0 45px;

@@ -12,7 +12,6 @@
 	-webkit-transition: opacity .3s ease;
 	-o-transition: opacity .3s ease;
 }
-
 .posts__btn-like:hover {
 	opacity: .5;
 }

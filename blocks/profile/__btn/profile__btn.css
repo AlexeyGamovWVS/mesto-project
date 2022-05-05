@@ -8,7 +8,6 @@
 	-webkit-transition: opacity .3s ease;
 	-o-transition: opacity .3s ease;
 }
-
 .profile__btn:hover {
 	opacity: .6;
 }

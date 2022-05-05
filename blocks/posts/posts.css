@@ -2,7 +2,6 @@
 	margin: 0 auto;
 	padding: 25px 0 33px;
 }
-
 @media screen and (max-width: 960px) {
 	.posts {
 		padding: 18px 0 24px;
@@ -10,7 +9,6 @@
 		justify-content: center;
 	}
 }
-
 @media screen and (max-width: 640px) {
 	.posts {
 		padding: 28px 0 24px;

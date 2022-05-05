@@ -13,11 +13,9 @@
 	-webkit-transition: opacity .3s ease;
 	-o-transition: opacity .3s ease;
 }
-
 .form__btn-save:hover {
 	opacity: .8;
 }
-
 @media screen and (max-width: 640px) {
 	.form__btn-save {
 		font-size: 14px;

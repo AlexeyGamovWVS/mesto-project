@@ -5,7 +5,6 @@
 	-webkit-transition: opacity .3s ease;
 	-o-transition: opacity .3s ease;
 }
-
 .header__logo-box:hover {
 	opacity: .8;
 }

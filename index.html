@@ -10,7 +10,6 @@
     <link rel="shortcut icon" href="./images/favicon.svg" type="image/x-icon" />
     <link rel="stylesheet" href="./pages/index.css" />
   </head>
-
   <body class="page">
     <header class="header">
       <div class="header__container">
@@ -24,7 +23,6 @@
         <div class="header__divider"></div>
       </div>
     </header>
-
     <main class="content">
       <section class="profile">
         <div class="profile__container">
@@ -137,19 +135,19 @@
             </div>
             <div class="posts__description-row">
               <p class="posts__name">Тре-Чиме-ди-Лаваред</p>
-              <button class="posts__btn-like posts__btn-like_type_active"></button>
+              <button
+                class="posts__btn-like posts__btn-like_type_active"
+              ></button>
             </div>
           </li>
         </ul>
       </section>
     </main>
-
     <footer class="footer">
       <div class="footer__container">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
       </div>
     </footer>
-
     <section id="edit-profile-popup" class="popup">
       <div class="popup__container">
         <button id="close-edit-profile" class="popup__btn-close">
@@ -160,35 +158,33 @@
           />
         </button>
         <form action="#" class="form">
-            <h2 class="form__title">Редактировать профиль</h2>
-            <feildset class="form__input-container">
-              <input
-                name="name"
-                id="author"
-                class="form__item form__item_el_author"
-                type="text"
-                placeholder="Введите имя профиля"
-              />
-              <input
-                name="status"
-                id="status"
-                class="form__item form__item_el_status"
-                type="text"
-                placeholder="Краткое описание профиля"
-              />
-            </feildset>
-            <button type="submit" class="form__btn-save">Сохранить</button>
+          <h2 class="form__title">Редактировать профиль</h2>
+          <feildset class="form__input-container">
+            <input
+              name="name"
+              id="author"
+              class="form__item form__item_el_author"
+              type="text"
+              placeholder="Введите имя профиля"
+            />
+            <input
+              name="status"
+              id="status"
+              class="form__item form__item_el_status"
+              type="text"
+              placeholder="Краткое описание профиля"
+            />
+          </feildset>
+          <button type="submit" class="form__btn-save">Сохранить</button>
         </form>
       </div>
     </section>
-
     <script>
       document.getElementById("edit-profile").onclick = function () {
         document
           .getElementById("edit-profile-popup")
           .classList.add("popup_opened");
       };
-
       document.getElementById("close-edit-profile").onclick = function () {
         document
           .getElementById("edit-profile-popup")
