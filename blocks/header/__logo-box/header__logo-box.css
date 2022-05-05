@@ -1,10 +1,10 @@
 .header__logo-box {
-	text-decoration: none;
-	transition: opacity .3s ease;
-	-moz-transition: opacity .3s ease;
-	-webkit-transition: opacity .3s ease;
-	-o-transition: opacity .3s ease;
+  text-decoration: none;
+  transition: opacity .3s ease;
+  -moz-transition: opacity .3s ease;
+  -webkit-transition: opacity .3s ease;
+  -o-transition: opacity .3s ease;
 }
 .header__logo-box:hover {
-	opacity: .8;
+  opacity: .8;
 }

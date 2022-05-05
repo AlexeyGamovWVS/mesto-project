@@ -1,15 +1,15 @@
 .profile__description {
-	max-width: 400px;
-	display: flex;
-	flex-direction: column;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
 }
 @media screen and (max-width: 960px) {
-	.profile__description {
-		max-width: unset;
-	}
+  .profile__description {
+    max-width: unset;
+  }
 }
 @media screen and (max-width: 640px) {
-	.profile__description {
-		margin-bottom: 33px;
-	}
+  .profile__description {
+    margin-bottom: 33px;
+  }
 }

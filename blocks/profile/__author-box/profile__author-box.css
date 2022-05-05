@@ -1,9 +1,9 @@
 .profile__author-box {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 @media screen and (max-width: 640px) {
-	.profile__author-box {
-		flex-direction: column;
-	}
+  .profile__author-box {
+    flex-direction: column;
+  }
 }
