@@ -112,10 +112,7 @@
             />
             <div class="post__description-row">
               <h3 class="post__name">Тре-Чиме-ди-Лаваред</h3>
-              <button
-                type="button"
-                class="post__btn-like"
-              ></button>
+              <button type="button" class="post__btn-like"></button>
             </div>
           </li>
         </ul>
@@ -126,7 +123,7 @@
         <p class="footer__copyright">© 2020 Mesto Russia</p>
       </div>
     </footer>
-    <section id="edit-profile-popup" class="popup">
+    <div id="edit-profile-popup" class="popup">
       <div class="popup__container">
         <button
           type="button"
@@ -134,7 +131,13 @@
           class="popup__btn-close"
           aria-label="Закрыть окно."
         ></button>
-        <form action="#" class="form">
+        <form
+          name="profile-edit-form"
+          id="profile-edit-form"
+          method="post"
+          action="#"
+          class="form"
+        >
           <h2 class="form__title">Редактировать профиль</h2>
           <feildset class="form__input-container">
             <input
@@ -155,18 +158,6 @@
           <button type="submit" class="form__btn-save">Сохранить</button>
         </form>
       </div>
-    </section>
-    <script>
-      document.getElementById("edit-profile").onclick = function () {
-        document
-          .getElementById("edit-profile-popup")
-          .classList.add("popup_opened");
-      };
-      document.getElementById("close-edit-profile").onclick = function () {
-        document
-          .getElementById("edit-profile-popup")
-          .classList.remove("popup_opened");
-      };
-    </script>
+    </div>
   </body>
 </html>
