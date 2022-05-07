@@ -1,4 +1,4 @@
-.posts__btn-like {
+.post__btn-like {
   background-color: transparent;
   cursor: pointer;
   align-items: center;
@@ -12,6 +12,6 @@
   -webkit-transition: opacity .3s ease;
   -o-transition: opacity .3s ease;
 }
-.posts__btn-like:hover {
+.post__btn-like:hover {
   opacity: .5;
 }

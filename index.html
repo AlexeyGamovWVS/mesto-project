@@ -49,84 +49,72 @@
       </section>
       <section class="posts">
         <ul class="posts__container">
-          <li class="posts__post">
-            <div class="posts__img-box">
-              <img
-                src="./images/karachaevsk.jpeg"
-                alt="Карачаевск. Вид на старую крепость на холме крупным планом."
-                class="posts__img"
-              />
-            </div>
-            <div class="posts__description-row">
-              <p class="posts__name">Карачаевск</p>
-              <button type="button" class="posts__btn-like"></button>
+          <li class="post">
+            <img
+              src="./images/karachaevsk.jpeg"
+              alt="Карачаевск. Вид на старую крепость на холме крупным планом."
+              class="post__img"
+            />
+            <div class="post__description-row">
+              <h3 class="post__name">Карачаевск</h3>
+              <button type="button" class="post__btn-like"></button>
             </div>
           </li>
-          <li class="posts__post">
-            <div class="posts__img-box">
-              <img
-                src="./images/elbrus.jpeg"
-                alt="Эльбрус. Вид на гору на закате."
-                class="posts__img"
-              />
-            </div>
-            <div class="posts__description-row">
-              <p class="posts__name">Гора Эльбрус</p>
-              <button type="button" class="posts__btn-like"></button>
+          <li class="post">
+            <img
+              src="./images/elbrus.jpeg"
+              alt="Эльбрус. Вид на гору на закате."
+              class="post__img"
+            />
+            <div class="post__description-row">
+              <h3 class="post__name">Гора Эльбрус</h3>
+              <button type="button" class="post__btn-like"></button>
             </div>
           </li>
-          <li class="posts__post">
-            <div class="posts__img-box">
-              <img
-                src="./images/domaby.jpeg"
-                alt="Домбай. Вид на скалы."
-                class="posts__img"
-              />
-            </div>
-            <div class="posts__description-row">
-              <p class="posts__name">Домбай</p>
-              <button type="button" class="posts__btn-like"></button>
+          <li class="post">
+            <img
+              src="./images/domaby.jpeg"
+              alt="Домбай. Вид на скалы."
+              class="post__img"
+            />
+            <div class="post__description-row">
+              <h3 class="post__name">Домбай</h3>
+              <button type="button" class="post__btn-like"></button>
             </div>
           </li>
-          <li class="posts__post">
-            <div class="posts__img-box">
-              <img
-                src="./images/mattern.jpeg"
-                alt="Самая известная вершина в мире — гора Маттерхорн."
-                class="posts__img"
-              />
-            </div>
-            <div class="posts__description-row">
-              <p class="posts__name">Маттерхорн</p>
-              <button type="button" class="posts__btn-like"></button>
+          <li class="post">
+            <img
+              src="./images/mattern.jpeg"
+              alt="Самая известная вершина в мире — гора Маттерхорн."
+              class="post__img"
+            />
+            <div class="post__description-row">
+              <h3 class="post__name">Маттерхорн</h3>
+              <button type="button" class="post__btn-like"></button>
             </div>
           </li>
-          <li class="posts__post">
-            <div class="posts__img-box">
-              <img
-                src="./images/serro.jpeg"
-                alt="Долина Серро-Торре."
-                class="posts__img"
-              />
-            </div>
-            <div class="posts__description-row">
-              <p class="posts__name">Серро-Торре</p>
-              <button type="button" class="posts__btn-like"></button>
+          <li class="post">
+            <img
+              src="./images/serro.jpeg"
+              alt="Долина Серро-Торре."
+              class="post__img"
+            />
+            <div class="post__description-row">
+              <h3 class="post__name">Серро-Торре</h3>
+              <button type="button" class="post__btn-like"></button>
             </div>
           </li>
-          <li class="posts__post">
-            <div class="posts__img-box">
-              <img
-                src="./images/rechime.jpeg"
-                alt="Горные долины Тре-Чиме-ди-Лаваред."
-                class="posts__img"
-              />
-            </div>
-            <div class="posts__description-row">
-              <p class="posts__name">Тре-Чиме-ди-Лаваред</p>
+          <li class="post">
+            <img
+              src="./images/rechime.jpeg"
+              alt="Горные долины Тре-Чиме-ди-Лаваред."
+              class="post__img"
+            />
+            <div class="post__description-row">
+              <h3 class="post__name">Тре-Чиме-ди-Лаваред</h3>
               <button
                 type="button"
-                class="posts__btn-like posts__btn-like_active"
+                class="post__btn-like"
               ></button>
             </div>
           </li>
@@ -140,8 +128,12 @@
     </footer>
     <section id="edit-profile-popup" class="popup">
       <div class="popup__container">
-        <button type="button" id="close-edit-profile" class="popup__btn-close" aria-label="Закрыть окно.">
-        </button>
+        <button
+          type="button"
+          id="close-edit-profile"
+          class="popup__btn-close"
+          aria-label="Закрыть окно."
+        ></button>
         <form action="#" class="form">
           <h2 class="form__title">Редактировать профиль</h2>
           <feildset class="form__input-container">
