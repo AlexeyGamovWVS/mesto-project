@@ -1,38 +1,8 @@
-/*
-
-К сожалению, я понятия не имею, почему этот проект загружается к вам в таком виде, как вы прислали,
-в моей программе всё отображается корректно: https://disk.yandex.ru/i/cNIedvn6pPOa3A
-
-я не использую гибкую табуляцию, так как это
-1. не требуется в правилах, дополнительно наставник уточнял, что можно использовать жёсткую табуляцию в 2 пробела
-2. не удобно лично мне. В моём VSC настроена табуляция, равная двум пробелам, что отлично видно на скриншоте выше
-и соответствует требованиям сдачи проектов.
-
-однако я заменил таблицию в каждой строке во всё коде. Надеюсь это поможет.
-
-относительно пустых строк, ради сдачи проекта я их стёр,
-однако процитирую требования из прикреплённого вами чек-листа:
-
-Пишите с новой строки и с отступами
-Пишите с новой строки каждый новый элемент: блок, список или таблицу,
-делайте отступ перед каждым новым дочерним элементом. Это упростит чтение кода.
-
-Дополнительно добавлю скриншот из того же документа, что вы выслали, как Яндекс оформляет примеры:
-https://disk.yandex.ru/i/Ml3VKLlPXtv6Qg
-
-Надеюсь, что в Normalalize.css нет необходимости удалять пустые строки.
-
-Спасибо.
-
-*/
-
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts.css);
 @import url(../blocks/page/page.css);
 @import url(../blocks/logo/logo.css);
 @import url(../blocks/header/header.css);
-@import url(../blocks/header/__container/header__container.css);
-@import url(../blocks/header/__divider/header__divider.css);
 @import url(../blocks/header/__logo-box/header__logo-box.css);
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/profile/profile.css);
@@ -46,8 +16,6 @@ https://disk.yandex.ru/i/Ml3VKLlPXtv6Qg
 @import url(../blocks/profile/__btn/profile__btn.css);
 @import url(../blocks/profile/__btn/_type/profile__btn_type_edit.css);
 @import url(../blocks/profile/__btn/_type/profile__btn_type_add.css);
-@import url(../blocks/profile/__btn-edit-icon/profile__btn-edit-icon.css);
-@import url(../blocks/profile/__btn-add-icon/profile__btn-add-icon.css);
 @import url(../blocks/posts/posts.css);
 @import url(../blocks/posts/__container/posts__container.css);
 @import url(../blocks/posts/__post/posts__post.css);
@@ -56,7 +24,7 @@ https://disk.yandex.ru/i/Ml3VKLlPXtv6Qg
 @import url(../blocks/posts/__description-row/posts__description-row.css);
 @import url(../blocks/posts/__name/posts__name.css);
 @import url(../blocks/posts/__btn-like/posts__btn-like.css);
-@import url(../blocks/posts/__btn-like/_type/posts__btn-like_type_active.css);
+@import url(../blocks/posts/__btn-like/_active/posts__btn-like_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__container/footer__container.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
@@ -64,7 +32,6 @@ https://disk.yandex.ru/i/Ml3VKLlPXtv6Qg
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__btn-close/popup__btn-close.css);
-@import url(../blocks/popup/__close-icon/popup__close-icon.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__input-container/form__input-container.css);
 @import url(../blocks/form/__title/form__title.css);

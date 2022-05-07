@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,51 +12,40 @@
   </head>
   <body class="page">
     <header class="header">
-      <div class="header__container">
-        <a href="/" class="header__logo-box">
-          <img
-            src="./images/logo.svg"
-            alt="Логтип «Место."
-            class="logo header__logo"
-          />
-        </a>
-        <div class="header__divider"></div>
-      </div>
+      <a href="/" class="header__logo-box">
+        <img
+          src="./images/logo.svg"
+          alt="Логтип «Место."
+          class="logo header__logo"
+        />
+      </a>
     </header>
     <main class="content">
       <section class="profile">
-        <div class="profile__container">
-          <div class="profile__author-box">
-            <img
-              src="./images/kusto.jpeg"
-              alt="Автор: Жак Ив Кусто"
-              class="profile__photo"
-            />
-            <div class="profile__description">
-              <div class="profile__title">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <button
-                  id="edit-profile"
-                  class="profile__btn profile__btn_type_edit"
-                >
-                  <img
-                    src="./images/Edit-Button.svg"
-                    alt="Редактировать."
-                    class="profile__btn-edit-icon"
-                  />
-                </button>
-              </div>
-              <p class="profile__status">Исследователь океана</p>
+        <div class="profile__author-box">
+          <img
+            src="./images/kusto.jpeg"
+            alt="Автор профиля."
+            class="profile__photo"
+          />
+          <div class="profile__description">
+            <div class="profile__title">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button
+                aria-label="Редактировать."
+                type="button"
+                id="edit-profile"
+                class="profile__btn profile__btn_type_edit"
+              ></button>
             </div>
+            <p class="profile__status">Исследователь океана</p>
           </div>
-          <button class="profile__btn profile__btn_type_add">
-            <img
-              src="./images/Add-button-Icon.svg"
-              alt="Добавить пост."
-              class="profile__btn-add-icon"
-            />
-          </button>
         </div>
+        <button
+          type="button"
+          class="profile__btn profile__btn_type_add"
+          aria-label="Добавить новый пост."
+        ></button>
       </section>
       <section class="posts">
         <ul class="posts__container">
@@ -70,7 +59,7 @@
             </div>
             <div class="posts__description-row">
               <p class="posts__name">Карачаевск</p>
-              <button class="posts__btn-like"></button>
+              <button type="button" class="posts__btn-like"></button>
             </div>
           </li>
           <li class="posts__post">
@@ -83,7 +72,7 @@
             </div>
             <div class="posts__description-row">
               <p class="posts__name">Гора Эльбрус</p>
-              <button class="posts__btn-like"></button>
+              <button type="button" class="posts__btn-like"></button>
             </div>
           </li>
           <li class="posts__post">
@@ -96,7 +85,7 @@
             </div>
             <div class="posts__description-row">
               <p class="posts__name">Домбай</p>
-              <button class="posts__btn-like"></button>
+              <button type="button" class="posts__btn-like"></button>
             </div>
           </li>
           <li class="posts__post">
@@ -109,7 +98,7 @@
             </div>
             <div class="posts__description-row">
               <p class="posts__name">Маттерхорн</p>
-              <button class="posts__btn-like"></button>
+              <button type="button" class="posts__btn-like"></button>
             </div>
           </li>
           <li class="posts__post">
@@ -122,7 +111,7 @@
             </div>
             <div class="posts__description-row">
               <p class="posts__name">Серро-Торре</p>
-              <button class="posts__btn-like"></button>
+              <button type="button" class="posts__btn-like"></button>
             </div>
           </li>
           <li class="posts__post">
@@ -136,7 +125,8 @@
             <div class="posts__description-row">
               <p class="posts__name">Тре-Чиме-ди-Лаваред</p>
               <button
-                class="posts__btn-like posts__btn-like_type_active"
+                type="button"
+                class="posts__btn-like posts__btn-like_active"
               ></button>
             </div>
           </li>
@@ -150,12 +140,7 @@
     </footer>
     <section id="edit-profile-popup" class="popup">
       <div class="popup__container">
-        <button id="close-edit-profile" class="popup__btn-close">
-          <img
-            src="./images/Close-Icon.svg"
-            alt="Закрыть окно."
-            class="popup__close-icon"
-          />
+        <button type="button" id="close-edit-profile" class="popup__btn-close" aria-label="Закрыть окно.">
         </button>
         <form action="#" class="form">
           <h2 class="form__title">Редактировать профиль</h2>

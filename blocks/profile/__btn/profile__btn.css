@@ -1,7 +1,6 @@
 .profile__btn {
   background-color: transparent;
   cursor: pointer;
-  align-items: center;
   border: none;
   transition: opacity .3s ease;
   -moz-transition: opacity .3s ease;
