@@ -22,6 +22,8 @@
 @import url(../blocks/post/__description-row/post__description-row.css);
 @import url(../blocks/post/__name/post__name.css);
 @import url(../blocks/post/__btn-like/post__btn-like.css);
+@import url(../blocks/post/__btn-like/_active/post__btn-like_active.css);
+@import url(../blocks/post/__delete/post__delete.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);

@@ -50,72 +50,24 @@
       </section>
       <section class="posts">
         <ul class="posts__container">
-          <li class="post">
-            <img
-              src="./images/karachaevsk.jpeg"
-              alt="Карачаевск. Вид на старую крепость на холме крупным планом."
-              class="post__img"
-            />
-            <div class="post__description-row">
-              <h3 class="post__name">Карачаевск</h3>
-              <button type="button" class="post__btn-like"></button>
-            </div>
-          </li>
-          <li class="post">
-            <img
-              src="./images/elbrus.jpeg"
-              alt="Эльбрус. Вид на гору на закате."
-              class="post__img"
-            />
-            <div class="post__description-row">
-              <h3 class="post__name">Гора Эльбрус</h3>
-              <button type="button" class="post__btn-like"></button>
-            </div>
-          </li>
-          <li class="post">
-            <img
-              src="./images/domaby.jpeg"
-              alt="Домбай. Вид на скалы."
-              class="post__img"
-            />
-            <div class="post__description-row">
-              <h3 class="post__name">Домбай</h3>
-              <button type="button" class="post__btn-like"></button>
-            </div>
-          </li>
-          <li class="post">
-            <img
-              src="./images/mattern.jpeg"
-              alt="Самая известная вершина в мире — гора Маттерхорн."
-              class="post__img"
-            />
-            <div class="post__description-row">
-              <h3 class="post__name">Маттерхорн</h3>
-              <button type="button" class="post__btn-like"></button>
-            </div>
-          </li>
-          <li class="post">
-            <img
-              src="./images/serro.jpeg"
-              alt="Долина Серро-Торре."
-              class="post__img"
-            />
-            <div class="post__description-row">
-              <h3 class="post__name">Серро-Торре</h3>
-              <button type="button" class="post__btn-like"></button>
-            </div>
-          </li>
-          <li class="post">
-            <img
-              src="./images/rechime.jpeg"
-              alt="Горные долины Тре-Чиме-ди-Лаваред."
-              class="post__img"
-            />
-            <div class="post__description-row">
-              <h3 class="post__name">Тре-Чиме-ди-Лаваред</h3>
-              <button type="button" class="post__btn-like"></button>
-            </div>
-          </li>
+
+          <!-- ========== template for posts starts =========== -->
+          <template id="post">
+            <li class="post">
+              <button type="button" class="post__delete"></button>
+              <img
+                src=""
+                alt=""
+                class="post__img"
+              />
+              <div class="post__description-row">
+                <h3 class="post__name"></h3>
+                <button type="button" class="post__btn-like"></button>
+              </div>
+            </li>
+          </template>
+          <!-- ========== template for posts ends =========== -->
+
         </ul>
       </section>
     </main>
@@ -202,108 +154,136 @@
     </div>
 
     <script>
-
-      const editPop = document.querySelector('#edit-profile-popup');
-      const btnEdit = document.querySelector('#edit-profile');
-      const btnClose = document.querySelector('#close-edit-profile');
-      const formElement = document.querySelector('#profile-edit-form');
-
-      const profileName = document.querySelector('.profile__name');
-      const profileDescr = document.querySelector('.profile__status');
-
-      const inputName = formElement.querySelector('#author');
-      const inputDescr = formElement.querySelector('#status');
-
-      inputName.value = profileName.textContent;
-      inputDescr.value = profileDescr.textContent;
-
-      function changeProfile(evt) {
-        evt.preventDefault();
-        profileName.textContent = inputName.value;
-        profileDescr.textContent = inputDescr.value;
-        editPop.classList.remove('popup_opened');
+      //универсальная функция открытия-закрытия окон
+      function openclose(pop) {
+        pop.classList.toggle('popup_opened');
       }
-
-      btnEdit.addEventListener('click', function open() {editPop.classList.add('popup_opened')});
-      btnClose.addEventListener('click', function close() {editPop.classList.remove('popup_opened')});
-
-      formElement.addEventListener('submit', changeProfile);
-
     </script>
 
     <script>
-      const posts = document.querySelector('.posts__container');
-      const initialCards = [
-        {
-          name: 'Архыз',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-        },
-        {
-          name: 'Челябинская область',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-        },
-        {
-          name: 'Иваново',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-        },
-        {
-          name: 'Камчатка',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-        },
-        {
-          name: 'Холмогорский район',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-        },
-        {
-          name: 'Байкал',
-          link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-        }
-      ];
+      // ====== открытие поп-ап окна редактирования профиля ======
+      const editPop = document.querySelector('#edit-profile-popup');
+      const btnEdit = document.querySelector('#edit-profile');
+      const btnClose = document.querySelector('#close-edit-profile');
 
-      for (let i = 0; i < initialCards.length; i++) {
-        posts.insertAdjacentHTML('afterbegin', `
-          <li class="post">
-            <img
-              src="${initialCards[i].link}"
-              class="post__img"
-            />
-            <div class="post__description-row">
-              <h3 class="post__name">${initialCards[i].name}</h3>
-              <button type="button" class="post__btn-like"></button>
-            </div>
-          </li>
-        `);
-      };
+      const formElement = document.querySelector('#profile-edit-form');
+      const inputName = formElement.querySelector('#author');
+      const inputDescr = formElement.querySelector('#status');
 
-      const addBtn = document.querySelector('#add-btn');
-      const addClose = document.querySelector('#close-add-popup');
-      const addPop = document.querySelector('#post-add-popup');
-      const addForm = document.querySelector('#add-post-form');
-      const inputPlace = addForm.querySelector('#place');
-      const inputImgLink = addForm.querySelector('#img-link');
+      //Функция перезаписи инфы в профиле
+      function changeProfile() {
+        document.querySelector('.profile__name').textContent = inputName.value;
+        document.querySelector('.profile__status').textContent = inputDescr.value;
+      }
 
-      addBtn.addEventListener('click', function open() {addPop.classList.add('popup_opened')});
-      addClose.addEventListener('click', function close() {addPop.classList.remove('popup_opened')});
+      //Подгрузка в поля значений из вёрстки
+      inputName.value = document.querySelector('.profile__name').textContent;
+      inputDescr.value = document.querySelector('.profile__status').textContent;
 
-      function addpost(evt) {
+      //Отслеживание кнопок открытия / закрытия окна
+      btnEdit.addEventListener('click', function() {openclose(editPop)});
+      btnClose.addEventListener('click', function() {openclose(editPop)});
+
+      //Отправка формы и перезапись данных
+      formElement.addEventListener('submit', function(evt) {
         evt.preventDefault();
-        posts.insertAdjacentHTML('afterbegin', `
-          <li class="post">
-            <img
-              src="${inputImgLink.value}"
-              class="post__img"
-            />
-            <div class="post__description-row">
-              <h3 class="post__name">${inputPlace.value}</h3>
-              <button type="button" class="post__btn-like"></button>
-            </div>
-          </li>
-        `);
-        addPop.classList.remove('popup_opened');
+        changeProfile();
+        openclose(editPop);
+      });
+    </script>
+
+    <script>
+      // ====== открытие формы на добавление постов ======
+      const addPop = document.querySelector('#post-add-popup');
+      const btnAdd = document.querySelector('#add-btn');
+      const btnAddClose = document.querySelector('#close-add-popup');
+      const formAdd = document.querySelector('#add-post-form');
+
+      // ====== функция генерации поста в темплейт =======
+      function addpost(inPlace, inLink) {
+        const posts = document.querySelector('.posts__container');
+        let postTemplate = document.querySelector('#post').content;
+        let postElement = postTemplate.querySelector('.post').cloneNode(true);
+
+        postElement.querySelector('.post__name').textContent = inPlace; //задаём название поста из поля
+        postElement.querySelector('.post__img').src = inLink; //задаём адрес картинки из поля
+        console.log(inPlace + inLink);
+        //колбэк для переключения класса кнопки лайка
+        postElement.querySelector('.post__btn-like').addEventListener('click', function (evt) {
+          evt.target.classList.toggle('post__btn-like_active');
+
+        // Nebezopasno
+          // posts.insertAdjacentHTML('afterbegin', `
+          //   <li class="post">
+          //     <img
+          //       src="${inLink}"
+          //       class="post__img"
+          //     />
+          //     <div class="post__description-row">
+          //       <h3 class="post__name">${inPlace}</h3>
+          //       <button type="button" class="post__btn-like"></button>
+          //     </div>
+          //   </li>
+          // `);
+        });
+
+        posts.prepend(postElement); //добавляем пост в начало контейнера
       };
 
-      addForm.addEventListener('submit', addpost);
 
+      btnAdd.addEventListener('click', function() {openclose(addPop)});
+      btnAddClose.addEventListener('click', function() {openclose(addPop)});
+
+      //Отправка формы и добавление поста
+      formAdd.addEventListener('submit', function(evt) {
+        const inputPlace = formAdd.querySelector('#place');
+        const inputLink = formAdd.querySelector('#img-link');
+
+        evt.preventDefault();
+        addpost(inputPlace.value, inputLink.value);
+        inputPlace.value = '';
+        inputLink.value = '';
+        openclose(addPop);
+      });
+    </script>
+
+    <script>
+      // ====== Инициализатор 6 постов =======
+      function postStartGen() {
+        const initialCards = [
+          {
+            name: 'Карачаевск',
+            link: './images/karachaevsk.jpeg'
+          },
+          {
+            name: 'Гора Эльбрус',
+            link: './images/elbrus.jpeg'
+          },
+          {
+            name: 'Домбай',
+            link: './images/domaby.jpeg'
+          },
+          {
+            name: 'Маттерхорн',
+            link: './images/mattern.jpeg'
+          },
+          {
+            name: 'Серро-Торре',
+            link: './images/serro.jpeg'
+          },
+          {
+            name: 'Тре-Чиме-ди-Лаваред',
+            link: './images/rechime.jpeg'
+          }
+        ];
+
+        for (let i = 0; i < initialCards.length; i++) {
+          addpost(initialCards[i].name, initialCards[i].link);
+          console.log(initialCards[i].name + initialCards[i].link);
+        };
+      }
+
+      postStartGen();
     </script>
   </body>
 </html>
