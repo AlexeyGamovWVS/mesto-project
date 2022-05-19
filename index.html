@@ -207,11 +207,8 @@
 
         postElement.querySelector('.post__name').textContent = inPlace; //задаём название поста из поля
         postElement.querySelector('.post__img').src = inLink; //задаём адрес картинки из поля
-        console.log(inPlace + inLink);
-        //колбэк для переключения класса кнопки лайка
-        postElement.querySelector('.post__btn-like').addEventListener('click', function (evt) {
-          evt.target.classList.toggle('post__btn-like_active');
 
+        //колбэк для переключения класса кнопки лайка
         // Nebezopasno
           // posts.insertAdjacentHTML('afterbegin', `
           //   <li class="post">
@@ -225,6 +222,12 @@
           //     </div>
           //   </li>
           // `);
+        postElement.querySelector('.post__btn-like').addEventListener('click', function (evt) {
+          evt.target.classList.toggle('post__btn-like_active');
+        });
+        postElement.querySelector('.post__delete').addEventListener('click', function (evt) {
+          const btnForDel = evt.target;
+          btnForDel.parentElement.remove();
         });
 
         posts.prepend(postElement); //добавляем пост в начало контейнера
