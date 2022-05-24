@@ -1,7 +1,18 @@
 .post__img {
+  position: relative;
+  z-index: 0;
   display: block;
   width: 100%;
   height: 282px;
   object-fit: cover;
   object-position: center;
+  cursor: pointer;
+  transition: filter .3s ease;
+  -moz-transition: filter .3s ease;
+  -o-transition: filter .3s ease;
+  -webkit-transition: filter .3s ease;
+}
+
+.post__img:hover {
+  filter: brightness(.6);
 }

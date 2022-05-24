@@ -153,11 +153,27 @@
       </div>
     </div>
 
+      <div id="post-popup" class="popup">
+        <div class="popup__container popup__container_type_img">
+          <button
+            type="button"
+            id="close-img-popup"
+            class="popup__btn-close"
+            aria-label="Закрыть окно."
+          ></button>
+          <figure class="popup__img">
+            <img src="" alt="" class="popup__img-item">
+            <figcaption class="popup__img-caption"></figcaption>
+          </figure>
+        </div>
+      </div>
+
     <script>
       //универсальная функция открытия-закрытия окон
-      function openclose(pop) {
-        pop.classList.toggle('popup_opened');
-      }
+      // function openclose(pop) {
+      //   pop.classList.toggle('popup_opened');
+      // }
+      const openclose = pop => {pop.classList.toggle('popup_opened')};
     </script>
 
     <script>
@@ -171,7 +187,7 @@
       const inputDescr = formElement.querySelector('#status');
 
       //Функция перезаписи инфы в профиле
-      function changeProfile() {
+      const changeProfile = () => {
         document.querySelector('.profile__name').textContent = inputName.value;
         document.querySelector('.profile__status').textContent = inputDescr.value;
       }
@@ -181,11 +197,11 @@
       inputDescr.value = document.querySelector('.profile__status').textContent;
 
       //Отслеживание кнопок открытия / закрытия окна
-      btnEdit.addEventListener('click', function() {openclose(editPop)});
-      btnClose.addEventListener('click', function() {openclose(editPop)});
+      btnEdit.addEventListener('click', () => openclose(editPop));
+      btnClose.addEventListener('click', () => openclose(editPop));
 
       //Отправка формы и перезапись данных
-      formElement.addEventListener('submit', function(evt) {
+      formElement.addEventListener('submit', evt => {
         evt.preventDefault();
         changeProfile();
         openclose(editPop);
@@ -199,8 +215,18 @@
       const btnAddClose = document.querySelector('#close-add-popup');
       const formAdd = document.querySelector('#add-post-form');
 
+      const imgPop = document.querySelector('#post-popup');
+      const btnCloseImgPop = imgPop.querySelector('#close-img-popup');
+      let imgPopItem = imgPop.querySelector('.popup__img-item');
+      let imgPopCaption = imgPop.querySelector('.popup__img-caption');
+
+      btnCloseImgPop.addEventListener('click', () => {
+        openclose(imgPop);
+        imgPopItem.src = '';
+        imgPopCaption.textContent = '';
+      });
       // ====== функция генерации поста в темплейт =======
-      function addpost(inPlace, inLink) {
+      const addpost = (inPlace, inLink) => {
         const posts = document.querySelector('.posts__container');
         let postTemplate = document.querySelector('#post').content;
         let postElement = postTemplate.querySelector('.post').cloneNode(true);
@@ -208,7 +234,7 @@
         postElement.querySelector('.post__name').textContent = inPlace; //задаём название поста из поля
         postElement.querySelector('.post__img').src = inLink; //задаём адрес картинки из поля
 
-        //колбэк для переключения класса кнопки лайка
+        //Переключение класса кнопки лайка и удаление постов
         // Nebezopasno
           // posts.insertAdjacentHTML('afterbegin', `
           //   <li class="post">
@@ -222,23 +248,26 @@
           //     </div>
           //   </li>
           // `);
-        postElement.querySelector('.post__btn-like').addEventListener('click', function (evt) {
-          evt.target.classList.toggle('post__btn-like_active');
-        });
-        postElement.querySelector('.post__delete').addEventListener('click', function (evt) {
-          const btnForDel = evt.target;
-          btnForDel.parentElement.remove();
+
+        postElement.querySelector('.post__btn-like').addEventListener('click', evt => evt.target.classList.toggle('post__btn-like_active'));
+        //Удаление постов через корзину
+        postElement.querySelector('.post__delete').addEventListener('click', evt => evt.target.parentElement.remove());
+        //========================================================================================
+        postElement.querySelector('.post__img').addEventListener('click', () => {
+          imgPopItem.src = inLink;
+          imgPopCaption.textContent = inPlace;
+          openclose(imgPop);
         });
 
         posts.prepend(postElement); //добавляем пост в начало контейнера
       };
 
 
-      btnAdd.addEventListener('click', function() {openclose(addPop)});
-      btnAddClose.addEventListener('click', function() {openclose(addPop)});
+      btnAdd.addEventListener('click', () => openclose(addPop));
+      btnAddClose.addEventListener('click', () => openclose(addPop));
 
       //Отправка формы и добавление поста
-      formAdd.addEventListener('submit', function(evt) {
+      formAdd.addEventListener('submit', evt => {
         const inputPlace = formAdd.querySelector('#place');
         const inputLink = formAdd.querySelector('#img-link');
 
@@ -277,16 +306,45 @@
           {
             name: 'Тре-Чиме-ди-Лаваред',
             link: './images/rechime.jpeg'
+          },
+          {
+            name: 'Архыз',
+            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+          },
+          {
+            name: 'Челябинская область',
+            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+          },
+          {
+            name: 'Иваново',
+            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+          },
+          {
+            name: 'Камчатка',
+            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+          },
+          {
+            name: 'Холмогорский район',
+            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+          },
+          {
+            name: 'Байкал',
+            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
           }
         ];
 
-        for (let i = 0; i < initialCards.length; i++) {
-          addpost(initialCards[i].name, initialCards[i].link);
-          console.log(initialCards[i].name + initialCards[i].link);
-        };
+        initialCards.forEach(item => addpost(item.name, item.link));
+        // обход массива без метода forEach
+        // for (let i = 0; i < initialCards.length; i++) {
+        //   addpost(initialCards[i].name, initialCards[i].link);
+        //   console.log(initialCards[i].name + initialCards[i].link);
+        // };
       }
 
       postStartGen();
+    </script>
+    <script>
+
     </script>
   </body>
 </html>
