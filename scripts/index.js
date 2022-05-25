@@ -15,12 +15,12 @@ const imgPopCaption = imgPop.querySelector('.popup__img-caption');
 
 // ====== forms & inputs ======
 const profileForm = document.querySelector('#profile-edit-form');
-const addPostIntoStartForm = document.querySelector('#add-post-form');
+const addPostForm = document.querySelector('#add-post-form');
 
 const inputName = profileForm.querySelector('#author');
 const inputDescr = profileForm.querySelector('#status');
-const inputPlace = addPostIntoStartForm.querySelector('#place');
-const inputLink = addPostIntoStartForm.querySelector('#img-link');
+const inputPlace = addPostForm.querySelector('#place');
+const inputLink = addPostForm.querySelector('#img-link');
 
 // ====== buttons ======
 const editProfileBtn = document.querySelector('#edit-profile');
@@ -135,7 +135,7 @@ const addPostIntoStart = (place, link) => {
 };
 
 // ====== Post Form Processing ======
-addPostIntoStartForm.addEventListener('submit', evt => {
+addPostForm.addEventListener('submit', evt => {
   evt.preventDefault();
   addPostIntoStart(inputPlace.value, inputLink.value);
   evt.target.reset();
