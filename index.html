@@ -94,20 +94,32 @@
         >
           <h2 class="form__title">Редактировать профиль</h2>
           <feildset class="form__input-container">
-            <input
-              name="name"
-              id="author"
-              class="form__item form__item_el_author"
-              type="text"
-              placeholder="Введите имя профиля"
-            />
-            <input
-              name="status"
-              id="status"
-              class="form__item form__item_el_status"
-              type="text"
-              placeholder="Краткое описание профиля"
-            />
+            <label class="form__field">
+              <input
+                name="name"
+                id="author"
+                class="form__item form__item_el_author"
+                type="text"
+                placeholder="Введите имя профиля"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span class="form__input-error author-input-error"></span>
+            </label>
+            <label class="form__field">
+              <input
+                name="status"
+                id="status"
+                class="form__item form__item_el_status"
+                type="text"
+                placeholder="Краткое описание профиля"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span class="form__input-error status-input-error"></span>
+            </label>
           </feildset>
           <button type="submit" class="form__btn-save">Сохранить</button>
         </form>
@@ -131,20 +143,30 @@
         >
           <h2 class="form__title">Новое место</h2>
           <feildset class="form__input-container">
-            <input
-              name="place"
-              id="place"
-              class="form__item form__item_el_place"
-              type="text"
-              placeholder="Название"
-            />
-            <input
-              name="img-link"
-              id="img-link"
-              class="form__item form__item_el_img-link"
-              type="URL"
-              placeholder="Ссылка на картинку"
-            />
+            <label class="form__field">
+              <input
+                name="place"
+                id="place"
+                class="form__item form__item_el_place"
+                type="text"
+                placeholder="Название"
+                minlength="2"
+                maxlength="30"
+                required
+              />
+              <span class="form__input-error status-input-error"></span>
+            </label>
+            <label class="form__field">
+              <input
+                name="img-link"
+                id="img-link"
+                class="form__item form__item_el_img-link"
+                type="URL"
+                placeholder="Ссылка на картинку"
+                required
+              />
+              <span class="form__input-error status-input-error"></span>
+            </label>
           </feildset>
           <button type="submit" class="form__btn-save">Сохранить</button>
         </form>
