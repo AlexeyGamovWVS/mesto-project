@@ -1,5 +1,5 @@
 .form__field {
   display: flex;
   position: relative;
-  flex-direction: column
+  flex-direction: column;
 }
