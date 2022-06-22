@@ -1,3 +1,4 @@
+import {enableValidation} from './validation.js';
 // ====== DOM Elements for changing ======
 const profileName = document.querySelector(".profile__name");
 const profileStatus = document.querySelector(".profile__status");
@@ -83,12 +84,12 @@ const initialCards = [
 const openPopup = (pop) => {
   pop.classList.add("popup_opened");
   pop.addEventListener("click", closePopupByOverlay);
-  window.addEventListener("keydown", closePopupByEsc);
+  document.addEventListener("keydown", closePopupByEsc);
 };
 const closePopup = (pop) => {
   pop.classList.remove("popup_opened");
   pop.removeEventListener("click", closePopupByOverlay);
-  window.removeEventListener("keydown", closePopupByEsc);
+  document.removeEventListener("keydown", closePopupByEsc);
 };
 
 editProfileBtn.addEventListener("click", () => openPopup(editPop));
@@ -117,10 +118,10 @@ function closePopupByEsc(evt) {
 inputName.value = profileName.textContent;
 inputDescr.value = profileStatus.textContent;
 
-const changeProfile = () => {
+function changeProfile() {
   profileName.textContent = inputName.value;
   profileStatus.textContent = inputDescr.value;
-};
+}
 
 profileForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
@@ -177,86 +178,14 @@ function renderInitialCards() {
 
 renderInitialCards();
 
-// Себе на память...
-// Небезопасное добавление постов
-// posts.insertAdjacentHTML('afterbegin', `
-//   <li class="post">
-//     <img
-//       src="${inLink}"
-//       class="post__img"
-//     />
-//     <div class="post__description-row">
-//       <h3 class="post__name">${inPlace}</h3>
-//       <button type="button" class="post__btn-like"></button>
-//     </div>
-//   </li>
-// `);
-//
-//
-
-// FORM LIVE VALIDATION START //
-
-function enableValidation() {
-  const listForm = Array.from(document.forms);
-  listForm.forEach((formElement) => {
-    setEventListeners(formElement);
-  });
-}
-
-function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll(".form__item"));
-  const buttonElement = formElement.querySelector(".form__btn-save");
-
-  toggleButtonState(inputList, buttonElement);
-
-  inputList.forEach((inputItem) => {
-    inputItem.addEventListener("input", function () {
-      checkInputValidity(formElement, inputItem);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-}
-
-function checkInputValidity(formElement, inputElement) {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-}
-
-function toggleButtonState(inputList, buttonElement) {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add("form__btn-save_disabled");
-  } else {
-    buttonElement.classList.remove("form__btn-save_disabled");
-  }
-}
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
+const validateConfig = {
+  inputSelector: ".form__item",
+  inputErrorClass: "form__item_type_error",
+  submitButtonSelector: ".form__btn-save",
+  inactiveButtonClass: "form__btn-save_disabled",
+  errorElementSelector: ".form__input-error",
+  errorElementClass: "form__input-error_active",
+  labelSelector: ".form__field",
 };
 
-function showInputError(formElement, inputElement, errorMessage) {
-  const errorElement = formElement.querySelector(
-    `.${inputElement.id}-input-error`
-  );
-  inputElement.classList.add("form__item_type_error");
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add("form__input-error_active");
-}
-
-function hideInputError(formElement, inputElement) {
-  const errorElement = formElement.querySelector(
-    `.${inputElement.id}-input-error`
-  );
-  inputElement.classList.remove("form__item_type_error");
-  errorElement.textContent = "";
-  errorElement.classList.remove("form__input-error_active");
-}
-
-enableValidation();
-
-// FORM LIVE VALIDATION END //
+enableValidation(validateConfig);
