@@ -1,18 +1,16 @@
-import {enableValidation} from './validation.js';
+import { enableValidation } from "./validation.js";
+import { openPopup, closePopup } from "./modal.js";
+import { setProfileSubmitListener } from "./profileForm.js";
+import { setPostAddSubmitListener } from "./addPostForm.js";
+import { renderInitialCards } from "./initialCards.js";
+
 // ====== DOM Elements for changing ======
 const profileName = document.querySelector(".profile__name");
 const profileStatus = document.querySelector(".profile__status");
-const posts = document.querySelector(".posts__container");
-const postTemplate = document.querySelector("#post").content;
 
 // ====== pop-ups ======
 const editPop = document.querySelector("#edit-profile-popup");
 const addPop = document.querySelector("#post-add-popup");
-const imgPop = document.querySelector("#post-popup");
-
-// ====== pop-up constants ======
-const imgPopItem = imgPop.querySelector(".popup__img-item");
-const imgPopCaption = imgPop.querySelector(".popup__img-caption");
 
 // ====== forms & inputs ======
 const profileForm = document.forms.profileEditForm;
@@ -20,15 +18,30 @@ const addPostForm = document.forms.addPostForm;
 
 const inputName = profileForm.elements.author;
 const inputDescr = profileForm.elements.status;
-const inputPlace = addPostForm.elements.place;
-const inputLink = addPostForm.elements.imgLink;
+inputName.value = profileName.textContent;
+inputDescr.value = profileStatus.textContent;
 
 // ====== buttons ======
 const editProfileBtn = document.querySelector("#edit-profile");
 const postAddButton = document.querySelector("#add-btn");
 const closeButtons = document.querySelectorAll(".popup__btn-close");
 
-// ====== Initial Cards ======
+editProfileBtn.addEventListener("click", () => openPopup(editPop));
+postAddButton.addEventListener("click", () => openPopup(addPop));
+closeButtons.forEach((button) => {
+  const popup = button.closest(".popup");
+  button.addEventListener("click", () => closePopup(popup));
+});
+
+const profileFormConfig = {
+  popup: editPop,
+  form: profileForm,
+  profileName: profileName,
+  profileStatus: profileStatus,
+  inputName: inputName,
+  inputDescr: inputDescr,
+};
+
 const initialCards = [
   {
     name: "Карачаевск",
@@ -80,103 +93,19 @@ const initialCards = [
   },
 ];
 
-// ====== buttons processing ======
-const openPopup = (pop) => {
-  pop.classList.add("popup_opened");
-  pop.addEventListener("click", closePopupByOverlay);
-  document.addEventListener("keydown", closePopupByEsc);
+const postCreationConfig = {
+  sectionSelector: ".posts__container",
+  postElementSelector: ".post",
+  postImageSelector: ".post__img",
+  postNameSelector: ".post__name",
+  postBtnLikeSelector: ".post__btn-like",
+  postBtnLikeActiveClass: "post__btn-like_active",
+  postBtnDelSelector: ".post__delete",
+  postTemplateId: "#post",
+  postImagePopupSelector: "#post-popup",
+  postImagePopupItemSelector: ".popup__img-item",
+  postImagePopupCaptionSelector: ".popup__img-caption",
 };
-const closePopup = (pop) => {
-  pop.classList.remove("popup_opened");
-  pop.removeEventListener("click", closePopupByOverlay);
-  document.removeEventListener("keydown", closePopupByEsc);
-};
-
-editProfileBtn.addEventListener("click", () => openPopup(editPop));
-postAddButton.addEventListener("click", () => openPopup(addPop));
-
-closeButtons.forEach((button) => {
-  const popup = button.closest(".popup");
-  button.addEventListener("click", () => closePopup(popup));
-});
-
-function closePopupByOverlay(evt) {
-  const activePop = document.querySelector(".popup_opened");
-  if (evt.target.classList.contains("popup")) {
-    closePopup(activePop);
-  }
-}
-
-function closePopupByEsc(evt) {
-  const activePop = document.querySelector(".popup_opened");
-  if (evt.key === "Escape") {
-    closePopup(activePop);
-  }
-}
-
-// ====== Profile Processing ======
-inputName.value = profileName.textContent;
-inputDescr.value = profileStatus.textContent;
-
-function changeProfile() {
-  profileName.textContent = inputName.value;
-  profileStatus.textContent = inputDescr.value;
-}
-
-profileForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  changeProfile();
-  closePopup(editPop);
-});
-
-// ====== Post Creation ======
-function createPost(place, link) {
-  const postElement = postTemplate.querySelector(".post").cloneNode(true);
-  const postImage = postElement.querySelector(".post__img");
-  const postName = postElement.querySelector(".post__name");
-
-  postName.textContent = place;
-  postImage.src = link;
-  postImage.setAttribute("alt", place);
-
-  // post's buttons processing start
-  postElement
-    .querySelector(".post__btn-like")
-    .addEventListener("click", (evt) =>
-      evt.target.classList.toggle("post__btn-like_active")
-    );
-  postElement
-    .querySelector(".post__delete")
-    .addEventListener("click", () => postElement.remove());
-
-  postImage.addEventListener("click", () => {
-    imgPopItem.src = link;
-    imgPopItem.setAttribute("alt", place);
-    imgPopCaption.textContent = place;
-    openPopup(imgPop);
-  });
-  // post's buttons processing end
-  return postElement;
-}
-
-const addPostIntoStart = (place, link) => {
-  posts.prepend(createPost(place, link));
-};
-
-// ====== Post Form Processing ======
-addPostForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  addPostIntoStart(inputPlace.value, inputLink.value);
-  evt.target.reset();
-  closePopup(addPop);
-});
-
-// ====== Initialize Posts =======
-function renderInitialCards() {
-  initialCards.forEach((item) => addPostIntoStart(item.name, item.link));
-}
-
-renderInitialCards();
 
 const validateConfig = {
   inputSelector: ".form__item",
@@ -188,4 +117,12 @@ const validateConfig = {
   labelSelector: ".form__field",
 };
 
+const postFormConfig = {
+  popup: addPop,
+  form: addPostForm,
+};
+
+renderInitialCards(initialCards, postCreationConfig);
 enableValidation(validateConfig);
+setProfileSubmitListener(profileFormConfig);
+setPostAddSubmitListener(postFormConfig, postCreationConfig);
