@@ -1,6 +1,6 @@
 import '../pages/index.css';
 
-import { enableValidation } from "./validate.js";
+import { enableValidation, checkInputValidity } from "./validate.js";
 import { openPopup, closePopup } from "./modal.js";
 import { renderCard, toggleButtonState } from "./utils.js";
 
@@ -141,6 +141,8 @@ function renderInitialCards(arr, config) {
 editProfileBtn.addEventListener("click", () => {
   inputName.value = profileName.textContent;
   inputDescr.value = profileStatus.textContent;
+  checkInputValidity(inputName, validateConfig);
+  checkInputValidity(inputDescr, validateConfig);
   openPopup(editPop);
 });
 
@@ -154,3 +156,22 @@ renderInitialCards(initialCards, postCreationConfig);
 enableValidation(validateConfig);
 setProfileSubmitListener(profileFormConfig);
 setPostAddSubmitListener(postFormConfig, postCreationConfig);
+
+// inputElement +
+
+
+
+// function hideInputError(inputElement, errorElement, {inputErrorClass, errorElementClass}) {
+//   const errorMessage = inputElement.validationMessage;
+//   inputElement.classList.remove(inputErrorClass);
+//   errorElement.textContent = errorMessage;
+//   errorElement.classList.remove(errorElementClass);
+// }
+
+// inputSelector: ".form__item",
+// inputErrorClass: "form__item_type_error",
+// submitButtonSelector: ".form__btn-save",
+// inactiveButtonClass: "form__btn-save_disabled",
+// errorElementSelector: ".form__input-error",
+// errorElementClass: "form__input-error_active",
+// labelSelector: ".form__field",

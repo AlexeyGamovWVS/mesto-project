@@ -19,26 +19,27 @@ function setEventListeners(form, {inputSelector, submitButtonSelector, inactiveB
   });
 }
 
-function checkInputValidity(input, {labelSelector, errorElementSelector, ...rest}) {
-  const errorMessage = input.validationMessage;
+export function checkInputValidity(input, {labelSelector, errorElementSelector, ...rest}) {
   const errorElement = input
     .closest(labelSelector)
     .querySelector(errorElementSelector);
   const isValid = input.validity.valid;
   if (!isValid) {
-    showInputError(input, errorElement, errorMessage, rest);
+    showInputError(input, errorElement, rest);
   } else {
-    hideInputError(input, errorElement, errorMessage, rest);
+    hideInputError(input, errorElement, rest);
   }
 }
 
-function showInputError(inputElement, errorElement, errorMessage, {inputErrorClass, errorElementClass}) {
+function showInputError(inputElement, errorElement, {inputErrorClass, errorElementClass}) {
+  const errorMessage = inputElement.validationMessage;
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorElementClass);
 }
 
-function hideInputError(inputElement, errorElement, errorMessage, {inputErrorClass, errorElementClass}) {
+function hideInputError(inputElement, errorElement, {inputErrorClass, errorElementClass}) {
+  const errorMessage = inputElement.validationMessage;
   inputElement.classList.remove(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.remove(errorElementClass);
