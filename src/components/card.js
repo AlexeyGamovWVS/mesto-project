@@ -1,10 +1,7 @@
 import { openPopup } from "./modal.js";
 
 export function createPost(config, place, link) {
-  const postTemplate = document.querySelector(config.postTemplateId).content;
-  const postElement = postTemplate
-    .querySelector(config.postElementSelector)
-    .cloneNode(true);
+  const postElement = getTemplate(config.postTemplateId, config.postElementSelector);
   const postImage = postElement.querySelector(config.postImageSelector);
   const postName = postElement.querySelector(config.postNameSelector);
 
@@ -12,22 +9,38 @@ export function createPost(config, place, link) {
   postImage.src = link;
   postImage.setAttribute("alt", place);
 
-  // post's buttons processing start
-  postElement
-    .querySelector(config.postBtnLikeSelector)
-    .addEventListener("click", (evt) =>
-      evt.target.classList.toggle(config.postBtnLikeActiveClass)
-    );
-  postElement
-    .querySelector(config.postBtnDelSelector)
-    .addEventListener("click", () => postElement.remove());
+  setLikeHandler(postElement, config.postBtnLikeSelector, config.postBtnLikeActiveClass);
+  setDeleteHandler(postElement, config.postBtnDelSelector);
+  setPopupOpenHandler(postImage, config.popupImage, config.imagePopup, link, place, config.imageCaption);
 
-  postImage.addEventListener("click", () => {
-    config.imagePopup.src = link;
-    config.imagePopup.setAttribute("alt", place);
-    config.imageCaption.textContent = place;
-    openPopup(config.popupImage);
-  });
-  // post's buttons processing end
   return postElement;
+}
+
+function getTemplate(postId, postSelector) {
+  const postTemplate = document.querySelector(postId).content;
+  const postElement = postTemplate
+    .querySelector(postSelector)
+    .cloneNode(true);
+  return postElement;
+}
+
+function setLikeHandler(post, btnSelector, stateClass) {
+  const likeBtn = post.querySelector(btnSelector);
+  likeBtn.addEventListener("click", (evt) =>
+    evt.target.classList.toggle(stateClass)
+  );
+}
+
+function setDeleteHandler(post, btnSelector) {
+  const deleteBtn = post.querySelector(btnSelector);
+  deleteBtn.addEventListener("click", () => post.remove());
+}
+
+function setPopupOpenHandler(postImage, popup, imagePopup, imageLink, place, imageCaption) {
+  postImage.addEventListener("click", () => {
+    imagePopup.src = imageLink;
+    imagePopup.setAttribute("alt", place);
+    imageCaption.textContent = place;
+    openPopup(popup);
+  })
 }
