@@ -1,7 +1,5 @@
-import { enableValidation } from "./validation.js";
+import { enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./modal.js";
-import { setProfileSubmitListener } from "./profileForm.js";
-import { setPostAddSubmitListener } from "./addPostForm.js";
 import { renderInitialCards } from "./initialCards.js";
 
 // ====== DOM Elements for changing ======
@@ -18,29 +16,13 @@ const addPostForm = document.forms.addPostForm;
 
 const inputName = profileForm.elements.author;
 const inputDescr = profileForm.elements.status;
-inputName.value = profileName.textContent;
-inputDescr.value = profileStatus.textContent;
 
 // ====== buttons ======
 const editProfileBtn = document.querySelector("#edit-profile");
 const postAddButton = document.querySelector("#add-btn");
 const closeButtons = document.querySelectorAll(".popup__btn-close");
 
-editProfileBtn.addEventListener("click", () => openPopup(editPop));
-postAddButton.addEventListener("click", () => openPopup(addPop));
-closeButtons.forEach((button) => {
-  const popup = button.closest(".popup");
-  button.addEventListener("click", () => closePopup(popup));
-});
-
-const profileFormConfig = {
-  popup: editPop,
-  form: profileForm,
-  profileName: profileName,
-  profileStatus: profileStatus,
-  inputName: inputName,
-  inputDescr: inputDescr,
-};
+// ====== configs =======
 
 const initialCards = [
   {
@@ -121,6 +103,58 @@ const postFormConfig = {
   popup: addPop,
   form: addPostForm,
 };
+
+const profileFormConfig = {
+  popup: editPop,
+  form: profileForm,
+  profileName: profileName,
+  profileStatus: profileStatus,
+  inputName: inputName,
+  inputDescr: inputDescr,
+};
+
+//====== functions ======
+
+function setPostAddSubmitListener({ form, popup }, config) {
+  const inputPlace = form.elements.place;
+  const inputLink = form.elements.imgLink;
+  form.addEventListener("submit", (evt) => {
+    evt.preventDefault();
+    addPostIntoStart(config, inputPlace.value, inputLink.value);
+    evt.target.reset();
+    closePopup(popup);
+  });
+}
+
+function setProfileSubmitListener({ form, popup, ...rest }) {
+  form.addEventListener("submit", (evt) => {
+    evt.preventDefault();
+    changeProfile(rest);
+    closePopup(popup);
+  });
+}
+
+function changeProfile({ profileName, profileStatus, inputName, inputDescr }) {
+  profileName.textContent = inputName.value;
+  profileStatus.textContent = inputDescr.value;
+}
+
+function renderInitialCards(arr, config) {
+  arr.forEach((item) => addPostIntoStart(config, item.name, item.link));
+}
+
+
+//====== processing & initialazing ======
+
+inputName.value = profileName.textContent;
+inputDescr.value = profileStatus.textContent;
+
+editProfileBtn.addEventListener("click", () => openPopup(editPop));
+postAddButton.addEventListener("click", () => openPopup(addPop));
+closeButtons.forEach((button) => {
+  const popup = button.closest(".popup");
+  button.addEventListener("click", () => closePopup(popup));
+});
 
 renderInitialCards(initialCards, postCreationConfig);
 enableValidation(validateConfig);
