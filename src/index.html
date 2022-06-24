@@ -4,17 +4,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mesto</title>
-    <meta name="description" content="" />
+    <title>Mesto — делись фотками любимых мест в лучшей соцсети</title>
+    <meta
+      name="description"
+      content="Социальная сеть для публикации фотографий любимых мест «Место»."
+    />
     <meta name="Author" content="Alexey Gamov" />
-    <link rel="shortcut icon" href="./images/favicon.svg" type="image/x-icon" />
-    <link rel="stylesheet" href="./pages/index.css" />
+    <link
+      rel="shortcut icon"
+      href="<%=require('./images/favicon.svg')%>"
+      type="image/x-icon"
+    />
   </head>
   <body class="page">
     <header class="header">
       <a href="/" class="header__logo-box">
         <img
-          src="./images/logo.svg"
+          src="<%=require('./images/logo.svg')%>"
           alt="Логтип «Место."
           class="logo header__logo"
         />
@@ -24,7 +30,7 @@
       <section class="profile">
         <div class="profile__author-box">
           <img
-            src="./images/kusto.jpeg"
+            src="<%=require('./images/kusto.jpeg')%>"
             alt="Автор профиля."
             class="profile__photo"
           />
@@ -182,6 +188,5 @@
         </figure>
       </div>
     </div>
-    <script type="module" src="./scripts/index.js"></script>
   </body>
 </html>

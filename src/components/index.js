@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 import { enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./modal.js";
 import { addPostIntoStart } from "./utils.js";
@@ -14,9 +16,6 @@ const addPop = document.querySelector("#post-add-popup");
 const profileForm = document.forms.profileEditForm;
 const addPostForm = document.forms.addPostForm;
 
-const inputName = profileForm.elements.author;
-const inputDescr = profileForm.elements.status;
-
 // ====== buttons ======
 const editProfileBtn = document.querySelector("#edit-profile");
 const postAddButton = document.querySelector("#add-btn");
@@ -24,54 +23,37 @@ const closeButtons = document.querySelectorAll(".popup__btn-close");
 
 // ====== configs =======
 
+const karachaevskImage = new URL('../images/karachaevsk.jpeg', import.meta.url);
+const elbrusImage = new URL('../images/elbrus.jpeg', import.meta.url);
+const dombaiImage = new URL('../images/domaby.jpeg', import.meta.url);
+const matternImage = new URL('../images/mattern.jpeg', import.meta.url);
+const serroImage = new URL('../images/serro.jpeg', import.meta.url);
+const rechimeImage = new URL('../images/rechime.jpeg', import.meta.url);
+
 const initialCards = [
   {
     name: "Карачаевск",
-    link: "./images/karachaevsk.jpeg",
+    link: karachaevskImage,
   },
   {
     name: "Гора Эльбрус",
-    link: "./images/elbrus.jpeg",
+    link: elbrusImage,
   },
   {
     name: "Домбай",
-    link: "./images/domaby.jpeg",
+    link: dombaiImage,
   },
   {
     name: "Маттерхорн",
-    link: "./images/mattern.jpeg",
+    link: matternImage,
   },
   {
     name: "Серро-Торре",
-    link: "./images/serro.jpeg",
+    link: serroImage,
   },
   {
     name: "Тре-Чиме-ди-Лаваред",
-    link: "./images/rechime.jpeg",
-  },
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+    link: rechimeImage,
   },
 ];
 
@@ -109,8 +91,8 @@ const profileFormConfig = {
   form: profileForm,
   profileName: profileName,
   profileStatus: profileStatus,
-  inputName: inputName,
-  inputDescr: inputDescr,
+  // inputName: inputName,
+  // inputDescr: inputDescr,
 };
 
 //====== functions ======
@@ -126,15 +108,19 @@ function setPostAddSubmitListener({ form, popup }, config) {
   });
 }
 
-function setProfileSubmitListener({ form, popup, ...rest }) {
+function setProfileSubmitListener({ form, popup, profileName, profileStatus }) {
+  const inputName = form.elements.author;
+  const inputDescr = form.elements.status;
+  inputName.value = profileName.textContent;
+  inputDescr.value = profileStatus.textContent;
   form.addEventListener("submit", (evt) => {
     evt.preventDefault();
-    changeProfile(rest);
+    changeProfile(profileName, profileStatus, inputName, inputDescr);
     closePopup(popup);
   });
 }
 
-function changeProfile({ profileName, profileStatus, inputName, inputDescr }) {
+function changeProfile(profileName, profileStatus, inputName, inputDescr) {
   profileName.textContent = inputName.value;
   profileStatus.textContent = inputDescr.value;
 }
@@ -145,9 +131,6 @@ function renderInitialCards(arr, config) {
 
 
 //====== processing & initialazing ======
-
-inputName.value = profileName.textContent;
-inputDescr.value = profileStatus.textContent;
 
 editProfileBtn.addEventListener("click", () => openPopup(editPop));
 postAddButton.addEventListener("click", () => openPopup(addPop));
