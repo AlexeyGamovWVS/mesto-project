@@ -1,9 +1,6 @@
 import { openPopup } from "./modal.js";
 
 export function createPost(config, place, link) {
-  const imgPop = document.querySelector(config.postImagePopupSelector);
-  const imgPopItem = imgPop.querySelector(config.postImagePopupItemSelector);
-  const imgPopCaption = imgPop.querySelector(config.postImagePopupCaptionSelector);
   const postTemplate = document.querySelector(config.postTemplateId).content;
   const postElement = postTemplate
     .querySelector(config.postElementSelector)
@@ -26,10 +23,10 @@ export function createPost(config, place, link) {
     .addEventListener("click", () => postElement.remove());
 
   postImage.addEventListener("click", () => {
-    imgPopItem.src = link;
-    imgPopItem.setAttribute("alt", place);
-    imgPopCaption.textContent = place;
-    openPopup(imgPop);
+    config.imagePopup.src = link;
+    config.imagePopup.setAttribute("alt", place);
+    config.imageCaption.textContent = place;
+    openPopup(config.popupImage);
   });
   // post's buttons processing end
   return postElement;

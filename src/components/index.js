@@ -2,7 +2,7 @@ import '../pages/index.css';
 
 import { enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./modal.js";
-import { addPostIntoStart } from "./utils.js";
+import { renderCard } from "./utils.js";
 
 // ====== DOM Elements for changing ======
 const profileName = document.querySelector(".profile__name");
@@ -11,6 +11,9 @@ const profileStatus = document.querySelector(".profile__status");
 // ====== pop-ups ======
 const editPop = document.querySelector("#edit-profile-popup");
 const addPop = document.querySelector("#post-add-popup");
+const popupImage = document.querySelector("#post-popup");
+const imagePopup = popupImage.querySelector(".popup__img-item");
+const imageCaption = popupImage.querySelector(".popup__img-caption");
 
 // ====== forms & inputs ======
 const profileForm = document.forms.profileEditForm;
@@ -66,9 +69,9 @@ const postCreationConfig = {
   postBtnLikeActiveClass: "post__btn-like_active",
   postBtnDelSelector: ".post__delete",
   postTemplateId: "#post",
-  postImagePopupSelector: "#post-popup",
-  postImagePopupItemSelector: ".popup__img-item",
-  postImagePopupCaptionSelector: ".popup__img-caption",
+  popupImage: popupImage,
+  imagePopup: imagePopup,
+  imageCaption: imageCaption,
 };
 
 const validateConfig = {
@@ -102,7 +105,7 @@ function setPostAddSubmitListener({ form, popup }, config) {
   const inputLink = form.elements.imgLink;
   form.addEventListener("submit", (evt) => {
     evt.preventDefault();
-    addPostIntoStart(config, inputPlace.value, inputLink.value);
+    renderCard(config, inputPlace.value, inputLink.value);
     evt.target.reset();
     closePopup(popup);
   });
@@ -126,7 +129,7 @@ function changeProfile(profileName, profileStatus, inputName, inputDescr) {
 }
 
 function renderInitialCards(arr, config) {
-  arr.forEach((item) => addPostIntoStart(config, item.name, item.link));
+  arr.forEach((item) => renderCard(config, item.name, item.link));
 }
 
 
