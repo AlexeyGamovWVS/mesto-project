@@ -19,6 +19,9 @@ const imageCaption = popupImage.querySelector(".popup__img-caption");
 const profileForm = document.forms.profileEditForm;
 const addPostForm = document.forms.addPostForm;
 
+const inputName = profileForm.elements.author;
+const inputDescr = profileForm.elements.status;
+
 // ====== buttons ======
 const editProfileBtn = document.querySelector("#edit-profile");
 const postAddButton = document.querySelector("#add-btn");
@@ -96,8 +99,8 @@ const profileFormConfig = {
   form: profileForm,
   profileName: profileName,
   profileStatus: profileStatus,
-  // inputName: inputName,
-  // inputDescr: inputDescr,
+  inputName: inputName,
+  inputDescr: inputDescr,
 };
 
 //====== functions ======
@@ -115,11 +118,7 @@ function setPostAddSubmitListener({ form, popup, submitButtonSelector, stateClas
   });
 }
 
-function setProfileSubmitListener({ form, popup, profileName, profileStatus }) {
-  const inputName = form.elements.author;
-  const inputDescr = form.elements.status;
-  inputName.value = profileName.textContent;
-  inputDescr.value = profileStatus.textContent;
+function setProfileSubmitListener({ form, popup, profileName, profileStatus, inputName, inputDescr }) {
   form.addEventListener("submit", (evt) => {
     evt.preventDefault();
     changeProfile(profileName, profileStatus, inputName, inputDescr);
@@ -139,7 +138,12 @@ function renderInitialCards(arr, config) {
 
 //====== processing & initialazing ======
 
-editProfileBtn.addEventListener("click", () => openPopup(editPop));
+editProfileBtn.addEventListener("click", () => {
+  inputName.value = profileName.textContent;
+  inputDescr.value = profileStatus.textContent;
+  openPopup(editPop);
+});
+
 postAddButton.addEventListener("click", () => openPopup(addPop));
 closeButtons.forEach((button) => {
   const popup = button.closest(".popup");
