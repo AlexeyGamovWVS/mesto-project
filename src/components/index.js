@@ -2,7 +2,7 @@ import '../pages/index.css';
 
 import { enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./modal.js";
-import { renderCard } from "./utils.js";
+import { renderCard, toggleButtonState } from "./utils.js";
 
 // ====== DOM Elements for changing ======
 const profileName = document.querySelector(".profile__name");
@@ -87,6 +87,8 @@ const validateConfig = {
 const postFormConfig = {
   popup: addPop,
   form: addPostForm,
+  submitButtonSelector: ".form__btn-save",
+  stateClass: "form__btn-save_disabled",
 };
 
 const profileFormConfig = {
@@ -100,13 +102,15 @@ const profileFormConfig = {
 
 //====== functions ======
 
-function setPostAddSubmitListener({ form, popup }, config) {
+function setPostAddSubmitListener({ form, popup, submitButtonSelector, stateClass }, config) {
   const inputPlace = form.elements.place;
   const inputLink = form.elements.imgLink;
-  form.addEventListener("submit", (evt) => {
+  const submitBtn = form.querySelector(submitButtonSelector);
+  form.addEventListener("submit", (evt) => { 
     evt.preventDefault();
     renderCard(config, inputPlace.value, inputLink.value);
     evt.target.reset();
+    toggleButtonState(form, submitBtn, stateClass);
     closePopup(popup);
   });
 }

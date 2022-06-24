@@ -1,3 +1,5 @@
+import { toggleButtonState } from "./utils.js";
+
 export function enableValidation(config) {
   const forms = Array.from(document.forms);
   forms.forEach((form) => {
@@ -27,17 +29,6 @@ function checkInputValidity(input, {labelSelector, errorElementSelector, ...rest
     showInputError(input, errorElement, errorMessage, rest);
   } else {
     hideInputError(input, errorElement, errorMessage, rest);
-  }
-}
-
-function toggleButtonState(form, button, stateClass) {
-  const isValid = form.checkValidity();
-  if (!isValid) {
-    button.classList.add(stateClass);
-    button.disabled = "disabled";
-  } else {
-    button.classList.remove(stateClass);
-    button.disabled = false;
   }
 }
 
