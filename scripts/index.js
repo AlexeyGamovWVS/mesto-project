@@ -1,6 +1,6 @@
 import { enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./modal.js";
-import { renderInitialCards } from "./initialCards.js";
+import { addPostIntoStart } from "./utils.js";
 
 // ====== DOM Elements for changing ======
 const profileName = document.querySelector(".profile__name");
