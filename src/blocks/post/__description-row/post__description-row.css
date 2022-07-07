@@ -1,6 +1,7 @@
 .post__description-row {
-  display: flex;
-  padding: 25px 20px;
-  align-items: center;
-  justify-content: space-between;
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 20px;
+	height: calc(100% - 282px);
 }

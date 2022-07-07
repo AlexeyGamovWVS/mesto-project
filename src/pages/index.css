@@ -23,6 +23,9 @@
 @import url(../blocks/post/__description-row/post__description-row.css);
 @import url(../blocks/post/__name/post__name.css);
 @import url(../blocks/post/__btn-like/post__btn-like.css);
+@import url(../blocks/post/__like-amount/post__like-amount.css);
+@import url(../blocks/post/__like-amount/_hidden/post__like-amount_hidden.css);
+@import url(../blocks/post/__like-box/post__like-box.css);
 @import url(../blocks/post/__btn-like/_active/post__btn-like_active.css);
 @import url(../blocks/post/__delete/post__delete.css);
 @import url(../blocks/footer/footer.css);
