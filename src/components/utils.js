@@ -20,6 +20,8 @@ const postCreationConfig = {
   postBtnLikeSelector: ".post__btn-like",
   postBtnLikeActiveClass: "post__btn-like_active",
   postBtnDelSelector: ".post__delete",
+	postLikeAmountSelector: ".post__like-amount",
+	postLikeAmountHiddenClass: "post__like-amount_hidden",
   postTemplateId: "#post",
   popupImage: popupImage,
   imagePopup: imagePopup,
@@ -40,15 +42,15 @@ export function renderInitialCards(config) {
   getInitialCards()
     .then((initialCards) => {
       initialCards.forEach((item) => {
-        renderCard(config, item.name, item.link);
+        renderCard(config, item.name, item.link, item.likes);
       });
     })
     .catch((err) => console.error(err));
 }
 
-export function renderCard({ sectionSelector, ...rest }, place, link) {
+export function renderCard({ sectionSelector, ...rest }, place, link, likes) {
   const section = document.querySelector(sectionSelector);
-  section.prepend(createPost(rest, place, link));
+  section.prepend(createPost(rest, place, link, likes.length));
 }
 
 // export function changeProfile(

@@ -76,7 +76,7 @@ function setPostAddSubmitListener(
     evt.preventDefault();
     sendPost(inputPlace.value, inputLink.value)
       .then((res) => {
-        renderCard(config, res.name, res.link);
+        renderCard(config, res.name, res.link, res.likes);
       })
       .catch((err) => console.log(err));
     evt.target.reset();
