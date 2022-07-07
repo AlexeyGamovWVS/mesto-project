@@ -5,6 +5,14 @@ export function createPost(config, place, link) {
   const postImage = postElement.querySelector(config.postImageSelector);
   const postName = postElement.querySelector(config.postNameSelector);
 
+
+
+
+	// config.popupImage = popupImage;
+	// config.imagePopup = imagePopup;
+	// config.imageCaption = imageCaption;
+
+
   postName.textContent = place;
   postImage.src = link;
   postImage.setAttribute("alt", place);

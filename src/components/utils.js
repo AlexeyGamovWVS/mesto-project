@@ -1,5 +1,4 @@
-import {createPost} from "./card.js";
-import { popupImage, imagePopup, imageCaption } from "./index.js";
+import { createPost } from "./card.js";
 
 const karachaevskImage = new URL('../images/karachaevsk.jpeg', import.meta.url);
 const elbrusImage = new URL('../images/elbrus.jpeg', import.meta.url);
@@ -34,6 +33,10 @@ const initialCards = [
   },
 ];
 
+const popupImage = document.querySelector("#post-popup");
+const imagePopup = popupImage.querySelector(".popup__img-item");
+const imageCaption = popupImage.querySelector(".popup__img-caption");
+
 const postCreationConfig = {
   sectionSelector: ".posts__container",
   postElementSelector: ".post",
@@ -65,26 +68,6 @@ export function renderInitialCards(config) {
 export function renderCard({sectionSelector, ...rest}, place, link) {
   const section = document.querySelector(sectionSelector);
   section.prepend(createPost(rest, place, link));
-}
-
-export function toggleButtonState(form, button, stateClass) {
-  const isValid = form.checkValidity();
-  if (!isValid) {
-    button.classList.add(stateClass);
-    button.disabled = "disabled";
-  } else {
-    button.classList.remove(stateClass);
-    button.disabled = false;
-  }
-}
-
-export function resetFormErrors(inputs, {labelSelector, errorElementSelector, inputErrorClass, errorElementClass}) {
-  const inputsList = Array.from(inputs);
-  inputsList.forEach(input => {
-    const errorElement = input.closest(labelSelector).querySelector(errorElementSelector);
-    input.classList.remove(inputErrorClass);
-    errorElement.classList.remove(errorElementClass);
-  })
 }
 
 export function changeProfile(profileName, profileStatus, inputName, inputDescr) {

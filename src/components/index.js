@@ -1,8 +1,8 @@
 import '../pages/index.css';
 
-import { enableValidation, checkInputValidity } from "./validate.js";
+import { enableValidation, toggleButtonState, resetFormErrors } from "./validate.js";
 import { openPopup, closePopup } from "./modal.js";
-import { renderCard, toggleButtonState, renderInitialCards, postCreationConfig, validateConfig, resetFormErrors, changeProfile } from "./utils.js";
+import { renderCard, renderInitialCards, postCreationConfig, validateConfig, changeProfile } from "./utils.js";
 
 // ====== DOM Elements for changing ======
 const profileName = document.querySelector(".profile__name");
@@ -11,10 +11,6 @@ const profileStatus = document.querySelector(".profile__status");
 // ====== pop-ups ======
 const editPop = document.querySelector("#edit-profile-popup");
 const addPop = document.querySelector("#post-add-popup");
-
-export const popupImage = document.querySelector("#post-popup");
-export const imagePopup = popupImage.querySelector(".popup__img-item");
-export const imageCaption = popupImage.querySelector(".popup__img-caption");
 
 // ====== forms & inputs ======
 const profileForm = document.forms.profileEditForm;
@@ -51,9 +47,6 @@ const profileFormConfig = {
 };
 
 //====== form functions ======
-// ! ДЛЯ РЕВЬЮ.. (по факту можно тоже убрать по своим файлам
-// функции обработчиков сабмитов форм, они полностью самостоятельны 
-// и управляются конфигами..., но не стал в целях ТЗ)
 
 function setPostAddSubmitListener({ form, popup, inputPlace, inputLink, submitButtonSelector, stateClass }, config) {
   const submitBtn = form.querySelector(submitButtonSelector);
