@@ -24,6 +24,34 @@ export function getInitialCards() {
   return fetch(key.cardsAdress, key.headers).then((res) => getResponse(res));
 }
 
+export function sendPost(name, link) {
+  return fetch(key.cardsAdress, {
+    method: "POST",
+    headers: {
+      authorization: "8412aadf-3d20-4816-8ed7-02669b62ac0d",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: name,
+      link: link,
+    }),
+  }).then((res) => getResponse(res));
+}
+
+export function sendUserData(userName, userAbout) {
+  return fetch(key.userAdress, {
+    method: "PATCH",
+    headers: {
+      authorization: "8412aadf-3d20-4816-8ed7-02669b62ac0d",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: userName,
+      about: userAbout,
+    }),
+  }).then((res) => getResponse(res));
+}
+
 function getResponse(res) {
   if (res.ok) {
     return res.json();

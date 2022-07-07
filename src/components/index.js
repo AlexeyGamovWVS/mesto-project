@@ -16,7 +16,7 @@ import {
   changeProfile,
 } from "./utils.js";
 
-import { getUserInfo, getInitialCards } from "./api.js";
+import { getUserInfo, sendPost, sendUserData } from "./api.js";
 
 // ====== DOM Elements for changing ======
 const profileName = document.querySelector(".profile__name");
@@ -76,7 +76,11 @@ function setPostAddSubmitListener(
   const submitBtn = form.querySelector(submitButtonSelector);
   form.addEventListener("submit", (evt) => {
     evt.preventDefault();
-    renderCard(config, inputPlace.value, inputLink.value);
+    sendPost(inputPlace.value, inputLink.value)
+      .then((res) => {
+        renderCard(config, res.name, res.link);
+      })
+      .catch((err) => console.log(err));
     evt.target.reset();
     toggleButtonState(form, submitBtn, stateClass);
     closePopup(popup);
@@ -93,7 +97,11 @@ function setProfileSubmitListener({
 }) {
   form.addEventListener("submit", (evt) => {
     evt.preventDefault();
-    changeProfile(profileName, profileStatus, inputName, inputDescr);
+		sendUserData(inputName.value, inputDescr.value)
+			.then(() => {
+				getUserInfo(user);
+			})
+			.catch((err) => console.error(err));
     closePopup(popup);
   });
 }
