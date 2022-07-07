@@ -90,3 +90,16 @@ renderInitialCards(postCreationConfig);
 enableValidation(validateConfig);
 setProfileSubmitListener(profileFormConfig);
 setPostAddSubmitListener(postFormConfig, postCreationConfig);
+
+
+function testFetch() {
+	fetch('https://mesto.nomoreparties.co/v1/plus-cohort-13/users', {
+		headers: {
+			authorization: '8412aadf-3d20-4816-8ed7-02669b62ac0d'
+		}
+	})
+	.then(res => res.json())
+	.then(data => console.log(data));
+}
+
+testFetch();
