@@ -1,14 +1,33 @@
-import '../pages/index.css';
+import "../pages/index.css";
 
-import { enableValidation, toggleButtonState, resetFormErrors } from "./validate.js";
+import {
+  enableValidation,
+  toggleButtonState,
+  resetFormErrors,
+} from "./validate.js";
+
 import { openPopup, closePopup } from "./modal.js";
-import { renderCard, renderInitialCards, postCreationConfig, validateConfig, changeProfile } from "./utils.js";
+
+import {
+  renderCard,
+  renderInitialCards,
+  postCreationConfig,
+  validateConfig,
+  changeProfile,
+} from "./utils.js";
 
 import { getUserInfo } from "./api.js";
 
 // ====== DOM Elements for changing ======
 const profileName = document.querySelector(".profile__name");
 const profileStatus = document.querySelector(".profile__status");
+const profileImage = document.querySelector(".profile__photo-item");
+
+const user = {
+  userName: profileName,
+  userStatus: profileStatus,
+  userImage: profileImage,
+};
 
 // ====== pop-ups ======
 const editPop = document.querySelector("#edit-profile-popup");
@@ -50,9 +69,12 @@ const profileFormConfig = {
 
 //====== form functions ======
 
-function setPostAddSubmitListener({ form, popup, inputPlace, inputLink, submitButtonSelector, stateClass }, config) {
+function setPostAddSubmitListener(
+  { form, popup, inputPlace, inputLink, submitButtonSelector, stateClass },
+  config
+) {
   const submitBtn = form.querySelector(submitButtonSelector);
-  form.addEventListener("submit", (evt) => { 
+  form.addEventListener("submit", (evt) => {
     evt.preventDefault();
     renderCard(config, inputPlace.value, inputLink.value);
     evt.target.reset();
@@ -61,7 +83,14 @@ function setPostAddSubmitListener({ form, popup, inputPlace, inputLink, submitBu
   });
 }
 
-function setProfileSubmitListener({ form, popup, profileName, profileStatus, inputName, inputDescr }) {
+function setProfileSubmitListener({
+  form,
+  popup,
+  profileName,
+  profileStatus,
+  inputName,
+  inputDescr,
+}) {
   form.addEventListener("submit", (evt) => {
     evt.preventDefault();
     changeProfile(profileName, profileStatus, inputName, inputDescr);
@@ -93,4 +122,4 @@ enableValidation(validateConfig);
 setProfileSubmitListener(profileFormConfig);
 setPostAddSubmitListener(postFormConfig, postCreationConfig);
 
-getUserInfo();
+getUserInfo(user);

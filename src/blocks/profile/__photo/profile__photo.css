@@ -2,7 +2,9 @@
   display: block;
   border-radius: 100%;
   width: 120px;
+	aspect-ratio: 1/1;
   margin-right: 30px;
+	overflow: hidden;
 }
 @media screen and (max-width: 960px) {
   .profile__photo {
