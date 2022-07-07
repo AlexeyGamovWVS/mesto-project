@@ -16,7 +16,7 @@ import {
   changeProfile,
 } from "./utils.js";
 
-import { getUserInfo } from "./api.js";
+import { getUserInfo, getInitialCards } from "./api.js";
 
 // ====== DOM Elements for changing ======
 const profileName = document.querySelector(".profile__name");
@@ -117,9 +117,8 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
+getUserInfo(user);
 renderInitialCards(postCreationConfig);
 enableValidation(validateConfig);
 setProfileSubmitListener(profileFormConfig);
 setPostAddSubmitListener(postFormConfig, postCreationConfig);
-
-getUserInfo(user);
