@@ -51,14 +51,14 @@ export function renderCard({ sectionSelector, ...rest }, place, link) {
   section.prepend(createPost(rest, place, link));
 }
 
-export function changeProfile(
-  profileName,
-  profileStatus,
-  inputName,
-  inputDescr
-) {
-  profileName.textContent = inputName.value;
-  profileStatus.textContent = inputDescr.value;
-}
+// export function changeProfile(
+//   profileName,
+//   profileStatus,
+//   inputName,
+//   inputDescr
+// ) {
+//   profileName.textContent = inputName.value;
+//   profileStatus.textContent = inputDescr.value;
+// }
 
 export { postCreationConfig };

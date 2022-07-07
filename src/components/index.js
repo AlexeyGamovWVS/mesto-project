@@ -13,7 +13,7 @@ import {
   renderInitialCards,
   postCreationConfig,
   validateConfig,
-  changeProfile,
+//  changeProfile,
 } from "./utils.js";
 
 import { getUserInfo, sendPost, sendUserData } from "./api.js";
@@ -61,8 +61,6 @@ const postFormConfig = {
 const profileFormConfig = {
   popup: editPop,
   form: profileForm,
-  profileName: profileName,
-  profileStatus: profileStatus,
   inputName: inputName,
   inputDescr: inputDescr,
 };
@@ -90,8 +88,6 @@ function setPostAddSubmitListener(
 function setProfileSubmitListener({
   form,
   popup,
-  profileName,
-  profileStatus,
   inputName,
   inputDescr,
 }) {
