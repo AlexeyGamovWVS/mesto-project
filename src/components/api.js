@@ -3,14 +3,13 @@ const key = {
   userAdress: "https://mesto.nomoreparties.co/v1/plus-cohort-13/users/me",
   cardsAdress: "https://mesto.nomoreparties.co/v1/plus-cohort-13/cards",
   headers: {
-    headers: {
-      authorization: "8412aadf-3d20-4816-8ed7-02669b62ac0d",
-    },
+    authorization: "8412aadf-3d20-4816-8ed7-02669b62ac0d",
+    "Content-Type": "application/json",
   },
 };
 
 export function getUserInfo(config) {
-  fetch(key.userAdress, key.headers)
+  fetch(key.userAdress, { headers: key.headers })
     .then((res) => getResponse(res))
     .then((data) => {
       config.userName.textContent = data.name;
@@ -21,21 +20,29 @@ export function getUserInfo(config) {
 }
 
 export function getInitialCards() {
-  return fetch(key.cardsAdress, key.headers).then((res) => getResponse(res));
+  return fetch(key.cardsAdress, { headers: key.headers }).then((res) =>
+    getResponse(res)
+  );
 }
 
 export function sendPost(name, link) {
   return fetch(key.cardsAdress, {
     method: "POST",
-    headers: {
-      authorization: "8412aadf-3d20-4816-8ed7-02669b62ac0d",
-      "Content-Type": "application/json",
-    },
+    headers: key.headers,
     body: JSON.stringify({
       name: name,
       link: link,
     }),
   }).then((res) => getResponse(res));
+}
+
+export function deletePost(cardId) {
+  return fetch(`${key.cardsAdress}/${cardId}`, {
+    method: "DELETE",
+    headers: key.headers,
+  })
+    .then((res) => getResponse(res))
+    .catch((err) => console.log(err));
 }
 
 export function sendUserData(userName, userAbout) {

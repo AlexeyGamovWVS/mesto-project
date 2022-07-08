@@ -1,6 +1,7 @@
-import { openPopup } from "./modal.js";
+import { deletePost } from "./api.js";
+import { closePopup, openPopup } from "./modal.js";
 
-export function createPost(config, place, link, likesAmount, owner) {
+export function createPost(config, place, link, likesAmount, owner, postId) {
   const postElement = getTemplate(
     config.postTemplateId,
     config.postElementSelector
@@ -32,7 +33,9 @@ export function createPost(config, place, link, likesAmount, owner) {
     setDeleteHandler(
       postElement,
       config.postBtnDelSelector,
-      config.deletePopup
+      config.deletePopup,
+      config.postBtnDelConfirmSelector,
+      postId
     );
   } else {
     const deleteBtn = postElement.querySelector(config.postBtnDelSelector);
@@ -72,11 +75,22 @@ function setLikeHandler(post, btnSelector, stateClass) {
   });
 }
 
-function setDeleteHandler(post, btnSelector, deletePopup) {
+function setDeleteHandler(
+  post,
+  btnSelector,
+  deletePopup,
+  confirmBtnSelector,
+  postId
+) {
   const deleteBtn = post.querySelector(btnSelector);
   deleteBtn.addEventListener("click", () => {
+    const submitDelBtn = deletePopup.querySelector(confirmBtnSelector);
     openPopup(deletePopup);
-    post.remove();
+    submitDelBtn.addEventListener("click", () => {
+			deletePost(postId);
+			closePopup(deletePopup);
+			post.remove();
+		});
   });
 }
 
