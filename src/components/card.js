@@ -59,6 +59,12 @@ export function createPost(config, place, link, likes, owner, postId) {
   return postElement;
 }
 
+function getTemplate(postId, postSelector) {
+  const postTemplate = document.querySelector(postId).content;
+  const postElement = postTemplate.querySelector(postSelector).cloneNode(true);
+  return postElement;
+}
+
 function updateLikeStatus(likes, post, btnSelector, classActive) {
   if (isLiked(likes)) {
     post.querySelector(btnSelector).classList.add(classActive);
@@ -74,12 +80,6 @@ function isLiked(likes) {
   return isMyLike;
 }
 
-function getTemplate(postId, postSelector) {
-  const postTemplate = document.querySelector(postId).content;
-  const postElement = postTemplate.querySelector(postSelector).cloneNode(true);
-  return postElement;
-}
-
 function updateLikesAmount(amount, amountBox, stateClass) {
   amountBox.textContent = amount;
   checkLikeAmount(amountBox, stateClass);
@@ -91,6 +91,31 @@ function checkLikeAmount(amountBox, stateClass) {
     return;
   }
   amountBox.classList.remove(stateClass);
+}
+
+function setDeleteHandler(
+  post,
+  btnSelector,
+  deletePopup,
+  confirmBtnSelector,
+  postId,
+  owner
+) {
+  const deleteBtn = post.querySelector(btnSelector);
+  if (owner === "efe1922996bcc79103e54788") {
+    deleteBtn.addEventListener("click", () => {
+      const submitDelBtn = deletePopup.querySelector(confirmBtnSelector);
+      openPopup(deletePopup);
+      submitDelBtn.addEventListener("click", () => {
+        deletePost(postId);
+        closePopup(deletePopup);
+        post.remove();
+      });
+    });
+    return;
+  }
+  deleteBtn.setAttribute("disabled", "disabled");
+  deleteBtn.style.display = "none";
 }
 
 function setLikeHandler(
@@ -122,31 +147,6 @@ function setLikeHandler(
         .catch((err) => console.log(err));
     }
   });
-}
-
-function setDeleteHandler(
-  post,
-  btnSelector,
-  deletePopup,
-  confirmBtnSelector,
-  postId,
-  owner
-) {
-  const deleteBtn = post.querySelector(btnSelector);
-  if (owner === "efe1922996bcc79103e54788") {
-    deleteBtn.addEventListener("click", () => {
-      const submitDelBtn = deletePopup.querySelector(confirmBtnSelector);
-      openPopup(deletePopup);
-      submitDelBtn.addEventListener("click", () => {
-        deletePost(postId);
-        closePopup(deletePopup);
-        post.remove();
-      });
-    });
-    return;
-  }
-  deleteBtn.setAttribute("disabled", "disabled");
-  deleteBtn.style.display = "none";
 }
 
 function setPopupOpenHandler(
