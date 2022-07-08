@@ -1,7 +1,7 @@
-import { deletePost } from "./api.js";
+import { deleteLike, deletePost, sendLike } from "./api.js";
 import { closePopup, openPopup } from "./modal.js";
 
-export function createPost(config, place, link, likesAmount, owner, postId) {
+export function createPost(config, place, link, likes, owner, postId) {
   const postElement = getTemplate(
     config.postTemplateId,
     config.postElementSelector
@@ -11,37 +11,42 @@ export function createPost(config, place, link, likesAmount, owner, postId) {
   const postLikeAmount = postElement.querySelector(
     config.postLikeAmountSelector
   );
-
-  // config.popupImage = popupImage;
-  // config.imagePopup = imagePopup;
-  // config.imageCaption = imageCaption;
+  const likesAmount = likes.length;
 
   postName.textContent = place;
   postImage.src = link;
   postImage.setAttribute("alt", place);
 
-  postLikeAmount.textContent = likesAmount;
-  checkLikeAmount(postLikeAmount, config.postLikeAmountHiddenClass);
-
-  setLikeHandler(
+  updateLikeStatus(
+    likes,
     postElement,
     config.postBtnLikeSelector,
     config.postBtnLikeActiveClass
   );
 
-  if (owner === "efe1922996bcc79103e54788") {
-    setDeleteHandler(
-      postElement,
-      config.postBtnDelSelector,
-      config.deletePopup,
-      config.postBtnDelConfirmSelector,
-      postId
-    );
-  } else {
-    const deleteBtn = postElement.querySelector(config.postBtnDelSelector);
-    deleteBtn.setAttribute("disabled", "disabled");
-    deleteBtn.style.display = "none";
-  }
+  updateLikesAmount(
+    likesAmount,
+    postLikeAmount,
+    config.postLikeAmountHiddenClass
+  );
+
+  setDeleteHandler(
+    postElement,
+    config.postBtnDelSelector,
+    config.deletePopup,
+    config.postBtnDelConfirmSelector,
+    postId,
+    owner
+  );
+
+  setLikeHandler(
+    postElement,
+    config.postBtnLikeSelector,
+    config.postBtnLikeActiveClass,
+    postId,
+    config.postLikeAmountHiddenClass,
+    postLikeAmount
+  );
 
   setPopupOpenHandler(
     postImage,
@@ -54,10 +59,30 @@ export function createPost(config, place, link, likesAmount, owner, postId) {
   return postElement;
 }
 
+function updateLikeStatus(likes, post, btnSelector, classActive) {
+  if (isLiked(likes)) {
+    post.querySelector(btnSelector).classList.add(classActive);
+    return;
+  }
+  post.querySelector(btnSelector).classList.remove(classActive);
+}
+
+function isLiked(likes) {
+  const isMyLike = likes.some((item) => {
+    return item._id === "efe1922996bcc79103e54788";
+  });
+  return isMyLike;
+}
+
 function getTemplate(postId, postSelector) {
   const postTemplate = document.querySelector(postId).content;
   const postElement = postTemplate.querySelector(postSelector).cloneNode(true);
   return postElement;
+}
+
+function updateLikesAmount(amount, amountBox, stateClass) {
+  amountBox.textContent = amount;
+  checkLikeAmount(amountBox, stateClass);
 }
 
 function checkLikeAmount(amountBox, stateClass) {
@@ -68,10 +93,34 @@ function checkLikeAmount(amountBox, stateClass) {
   amountBox.classList.remove(stateClass);
 }
 
-function setLikeHandler(post, btnSelector, stateClass) {
+function setLikeHandler(
+  post,
+  btnSelector,
+  stateClass,
+  postId,
+  amountHiddenClass,
+  amountBox
+) {
   const likeBtn = post.querySelector(btnSelector);
   likeBtn.addEventListener("click", (evt) => {
-    evt.target.classList.toggle(stateClass);
+    const likeElement = evt.target;
+    const likeStatus = likeElement.classList.contains(stateClass);
+
+    if (!likeStatus) {
+      likeElement.classList.toggle(stateClass);
+      sendLike(postId)
+        .then((res) => {
+          updateLikesAmount(res.likes.length, amountBox, amountHiddenClass);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      likeElement.classList.toggle(stateClass);
+      deleteLike(postId)
+        .then((res) => {
+          updateLikesAmount(res.likes.length, amountBox, amountHiddenClass);
+        })
+        .catch((err) => console.log(err));
+    }
   });
 }
 
@@ -80,18 +129,24 @@ function setDeleteHandler(
   btnSelector,
   deletePopup,
   confirmBtnSelector,
-  postId
+  postId,
+  owner
 ) {
   const deleteBtn = post.querySelector(btnSelector);
-  deleteBtn.addEventListener("click", () => {
-    const submitDelBtn = deletePopup.querySelector(confirmBtnSelector);
-    openPopup(deletePopup);
-    submitDelBtn.addEventListener("click", () => {
-			deletePost(postId);
-			closePopup(deletePopup);
-			post.remove();
-		});
-  });
+  if (owner === "efe1922996bcc79103e54788") {
+    deleteBtn.addEventListener("click", () => {
+      const submitDelBtn = deletePopup.querySelector(confirmBtnSelector);
+      openPopup(deletePopup);
+      submitDelBtn.addEventListener("click", () => {
+        deletePost(postId);
+        closePopup(deletePopup);
+        post.remove();
+      });
+    });
+    return;
+  }
+  deleteBtn.setAttribute("disabled", "disabled");
+  deleteBtn.style.display = "none";
 }
 
 function setPopupOpenHandler(

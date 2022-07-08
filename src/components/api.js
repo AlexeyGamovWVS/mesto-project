@@ -59,6 +59,22 @@ export function sendUserData(userName, userAbout) {
   }).then((res) => getResponse(res));
 }
 
+export function sendLike(cardId) {
+	return fetch(`${key.cardsAdress}/likes/${cardId}`, {
+		method: "PUT", 
+		headers: key.headers,
+	})
+		.then(res => getResponse(res));
+}
+
+export function deleteLike(cardId) {
+	return fetch(`${key.cardsAdress}/likes/${cardId}`, {
+		method: "DELETE", 
+		headers: key.headers,
+	})
+		.then(res => getResponse(res));
+}
+
 function getResponse(res) {
   if (res.ok) {
     return res.json();

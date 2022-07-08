@@ -53,7 +53,7 @@ export function renderInitialCards(config) {
 
 export function renderCard({ sectionSelector, ...rest }, place, link, likes, owner, postId) {
   const section = document.querySelector(sectionSelector);
-  section.prepend(createPost(rest, place, link, likes.length, owner, postId));
+  section.prepend(createPost(rest, place, link, likes, owner, postId));
 }
 
 // export function changeProfile(
