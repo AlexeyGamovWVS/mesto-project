@@ -13,6 +13,7 @@ import {
   renderInitialCards,
   postCreationConfig,
   validateConfig,
+	renderLoading,
   //  changeProfile,
 } from "./utils.js";
 
@@ -67,6 +68,7 @@ const profileFormConfig = {
   form: profileForm,
   inputName: inputName,
   inputDescr: inputDescr,
+  submitSelector: ".form__btn-save",
 };
 
 const profileImageFormConfig = {
@@ -86,26 +88,41 @@ function setPostAddSubmitListener(
   const submitBtn = form.querySelector(submitButtonSelector);
   form.addEventListener("submit", (evt) => {
     evt.preventDefault();
+    renderLoading(true, submitBtn);
     sendPost(inputPlace.value, inputLink.value)
       .then((res) => {
         renderCard(config, res.name, res.link, res.likes, res.owner._id);
       })
-      .catch((err) => console.log(err));
-    evt.target.reset();
-    toggleButtonState(form, submitBtn, stateClass);
-    closePopup(popup);
+      .catch((err) => console.log(err))
+      .finally(() => {
+				renderLoading(true, submitBtn);
+				evt.target.reset();
+				toggleButtonState(form, submitBtn, stateClass);
+				closePopup(popup);
+			});
   });
 }
 
-function setProfileSubmitListener({ form, popup, inputName, inputDescr }) {
+function setProfileSubmitListener({
+  form,
+  popup,
+  inputName,
+  inputDescr,
+  submitSelector,
+}) {
+  const submitBtn = form.querySelector(submitSelector);
   form.addEventListener("submit", (evt) => {
     evt.preventDefault();
+    renderLoading(false, submitBtn);
     sendUserData(inputName.value, inputDescr.value)
       .then(() => {
         getUserInfo(user);
       })
-      .catch((err) => console.error(err));
-    closePopup(popup);
+      .catch((err) => console.error(err))
+      .finally(() => {
+				renderLoading(false, submitBtn);
+				closePopup(popup);
+			});
   });
 }
 
@@ -113,12 +130,16 @@ function setProfileImageFormListener(config) {
   const submitBtn = config.form.querySelector(config.submitSelector);
   config.form.addEventListener("submit", (evt) => {
     evt.preventDefault();
+    renderLoading(true, submitBtn);
     sendUserPhoto(config.input.value)
       .then(() => getUserInfo(user))
-      .catch((err) => console.log(err));
-    evt.target.reset();
-    toggleButtonState(config.form, submitBtn, config.stateClass);
-    closePopup(config.popup);
+      .catch((err) => console.log(err))
+      .finally(() => {
+				renderLoading(false, submitBtn);
+				evt.target.reset();
+				toggleButtonState(config.form, submitBtn, config.stateClass);
+				closePopup(config.popup);
+			});
   });
 }
 

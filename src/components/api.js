@@ -1,6 +1,6 @@
 const key = {
   serverAdress: "https://mesto.nomoreparties.co/v1/plus-cohort-13/",
-  userAdress: "https://mesto.nomoreparties.co/v1/plus-cohort-13/users/me",
+  userAdress: `https://mesto.nomoreparties.co/v1/plus-cohort-13/users/me`,
   cardsAdress: "https://mesto.nomoreparties.co/v1/plus-cohort-13/cards",
   headers: {
     authorization: "8412aadf-3d20-4816-8ed7-02669b62ac0d",

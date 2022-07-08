@@ -56,6 +56,14 @@ export function renderCard({ sectionSelector, ...rest }, place, link, likes, own
   section.prepend(createPost(rest, place, link, likes, owner, postId));
 }
 
+export function renderLoading(isLoading, btn) {
+  if (isLoading) {
+    btn.textContent = "Сохраняем...";
+    return;
+  }
+  btn.textContent = "Сохранить";
+}
+
 // export function changeProfile(
 //   profileName,
 //   profileStatus,
