@@ -13,10 +13,10 @@ import {
   renderInitialCards,
   postCreationConfig,
   validateConfig,
-//  changeProfile,
+  //  changeProfile,
 } from "./utils.js";
 
-import { getUserInfo, sendPost, sendUserData } from "./api.js";
+import { getUserInfo, sendPost, sendUserData, sendUserPhoto } from "./api.js";
 
 // ====== DOM Elements for changing ======
 const profileName = document.querySelector(".profile__name");
@@ -32,7 +32,7 @@ const user = {
 // ====== pop-ups ======
 const editPop = document.querySelector("#edit-profile-popup");
 const addPop = document.querySelector("#post-add-popup");
-const profileImagePop = document.querySelector('#edit-profile-image-popup');
+const profileImagePop = document.querySelector("#edit-profile-image-popup");
 
 // ====== forms & inputs ======
 const profileForm = document.forms.profileEditForm;
@@ -49,7 +49,7 @@ const inputProfileImage = profileImageForm.elements.imgProfileLink;
 const editProfileBtn = document.querySelector("#edit-profile");
 const postAddButton = document.querySelector("#add-btn");
 const closeButtons = document.querySelectorAll(".popup__btn-close");
-const editImageProfileBtn = document.querySelector('.profile__photo-item');
+const editImageProfileBtn = document.querySelector(".profile__photo-item");
 
 // ====== configs =======
 
@@ -67,6 +67,14 @@ const profileFormConfig = {
   form: profileForm,
   inputName: inputName,
   inputDescr: inputDescr,
+};
+
+const profileImageFormConfig = {
+  popup: profileImagePop,
+  form: profileImageForm,
+  input: inputProfileImage,
+  submitSelector: ".form__btn-save",
+  stateClass: "form__btn-save_disabled",
 };
 
 //====== form functions ======
@@ -89,20 +97,28 @@ function setPostAddSubmitListener(
   });
 }
 
-function setProfileSubmitListener({
-  form,
-  popup,
-  inputName,
-  inputDescr,
-}) {
+function setProfileSubmitListener({ form, popup, inputName, inputDescr }) {
   form.addEventListener("submit", (evt) => {
     evt.preventDefault();
-		sendUserData(inputName.value, inputDescr.value)
-			.then(() => {
-				getUserInfo(user);
-			})
-			.catch((err) => console.error(err));
+    sendUserData(inputName.value, inputDescr.value)
+      .then(() => {
+        getUserInfo(user);
+      })
+      .catch((err) => console.error(err));
     closePopup(popup);
+  });
+}
+
+function setProfileImageFormListener(config) {
+  const submitBtn = config.form.querySelector(config.submitSelector);
+  config.form.addEventListener("submit", (evt) => {
+    evt.preventDefault();
+    sendUserPhoto(config.input.value)
+      .then(() => getUserInfo(user))
+      .catch((err) => console.log(err));
+    evt.target.reset();
+    toggleButtonState(config.form, submitBtn, config.stateClass);
+    closePopup(config.popup);
   });
 }
 
@@ -116,8 +132,8 @@ editProfileBtn.addEventListener("click", () => {
 });
 
 editImageProfileBtn.addEventListener("click", () => {
-	resetFormErrors([inputProfileImage], validateConfig);
-	openPopup(profileImagePop);
+  resetFormErrors([inputProfileImage], validateConfig);
+  openPopup(profileImagePop);
 });
 
 postAddButton.addEventListener("click", () => {
@@ -134,4 +150,5 @@ getUserInfo(user);
 renderInitialCards(postCreationConfig);
 enableValidation(validateConfig);
 setProfileSubmitListener(profileFormConfig);
-setPostAddSubmitListener(postFormConfig, postCreationConfig);  
+setPostAddSubmitListener(postFormConfig, postCreationConfig);
+setProfileImageFormListener(profileImageFormConfig);

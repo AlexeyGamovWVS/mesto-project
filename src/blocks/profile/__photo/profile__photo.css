@@ -1,5 +1,6 @@
 .profile__photo {
   display: block;
+	position: relative;
   border-radius: 100%;
   width: 120px;
 	aspect-ratio: 1/1;

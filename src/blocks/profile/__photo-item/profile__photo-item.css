@@ -8,5 +8,9 @@
 }
 
 .profile__photo-item:hover {
-	filter: brightness(.8);
+	filter: brightness(.2);
+}
+
+.profile__photo-item:hover + .profile__img-edit-icon {
+	opacity: 1;
 }

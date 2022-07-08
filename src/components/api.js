@@ -48,10 +48,7 @@ export function deletePost(cardId) {
 export function sendUserData(userName, userAbout) {
   return fetch(key.userAdress, {
     method: "PATCH",
-    headers: {
-      authorization: "8412aadf-3d20-4816-8ed7-02669b62ac0d",
-      "Content-Type": "application/json",
-    },
+    headers: key.headers,
     body: JSON.stringify({
       name: userName,
       about: userAbout,
@@ -60,19 +57,27 @@ export function sendUserData(userName, userAbout) {
 }
 
 export function sendLike(cardId) {
-	return fetch(`${key.cardsAdress}/likes/${cardId}`, {
-		method: "PUT", 
-		headers: key.headers,
-	})
-		.then(res => getResponse(res));
+  return fetch(`${key.cardsAdress}/likes/${cardId}`, {
+    method: "PUT",
+    headers: key.headers,
+  }).then((res) => getResponse(res));
 }
 
 export function deleteLike(cardId) {
-	return fetch(`${key.cardsAdress}/likes/${cardId}`, {
-		method: "DELETE", 
-		headers: key.headers,
-	})
-		.then(res => getResponse(res));
+  return fetch(`${key.cardsAdress}/likes/${cardId}`, {
+    method: "DELETE",
+    headers: key.headers,
+  }).then((res) => getResponse(res));
+}
+
+export function sendUserPhoto(imgLink) {
+  return fetch(`${key.userAdress}/avatar`, {
+    method: "PATCH",
+    headers: key.headers,
+    body: JSON.stringify({
+      avatar: imgLink,
+    }),
+  }).then((res) => getResponse(res));
 }
 
 function getResponse(res) {
