@@ -1,13 +1,15 @@
 import { openPopup } from "./modal.js";
 
-export function createPost(config, place, link, likesAmount) {
+export function createPost(config, place, link, likesAmount, owner) {
   const postElement = getTemplate(
     config.postTemplateId,
     config.postElementSelector
   );
   const postImage = postElement.querySelector(config.postImageSelector);
   const postName = postElement.querySelector(config.postNameSelector);
-	const postLikeAmount = postElement.querySelector(config.postLikeAmountSelector);
+  const postLikeAmount = postElement.querySelector(
+    config.postLikeAmountSelector
+  );
 
   // config.popupImage = popupImage;
   // config.imagePopup = imagePopup;
@@ -17,15 +19,23 @@ export function createPost(config, place, link, likesAmount) {
   postImage.src = link;
   postImage.setAttribute("alt", place);
 
-	postLikeAmount.textContent = likesAmount;
-	checkLikeAmount(postLikeAmount, config.postLikeAmountHiddenClass);
+  postLikeAmount.textContent = likesAmount;
+  checkLikeAmount(postLikeAmount, config.postLikeAmountHiddenClass);
 
   setLikeHandler(
     postElement,
     config.postBtnLikeSelector,
-    config.postBtnLikeActiveClass,
+    config.postBtnLikeActiveClass
   );
-  setDeleteHandler(postElement, config.postBtnDelSelector);
+
+  if (owner === 'efe1922996bcc79103e54788') {
+    setDeleteHandler(postElement, config.postBtnDelSelector);
+  } else {
+    const deleteBtn = postElement.querySelector(config.postBtnDelSelector);
+    deleteBtn.setAttribute("disabled", "disabled");
+    deleteBtn.style.display = "none";
+  }
+
   setPopupOpenHandler(
     postImage,
     config.popupImage,
@@ -44,14 +54,14 @@ function getTemplate(postId, postSelector) {
 }
 
 function checkLikeAmount(amountBox, stateClass) {
-	if ((amountBox.textContent === '0') || (amountBox.textContent === 0)) {
-		amountBox.classList.add(stateClass);
-		return
-	} 
-	amountBox.classList.remove(stateClass);
+  if (amountBox.textContent === "0" || amountBox.textContent === 0) {
+    amountBox.classList.add(stateClass);
+    return;
+  }
+  amountBox.classList.remove(stateClass);
 }
 
-function setLikeHandler(post, btnSelector, stateClass, likeAmount, likeState) {
+function setLikeHandler(post, btnSelector, stateClass) {
   const likeBtn = post.querySelector(btnSelector);
   likeBtn.addEventListener("click", (evt) => {
     evt.target.classList.toggle(stateClass);

@@ -42,15 +42,15 @@ export function renderInitialCards(config) {
   getInitialCards()
     .then((initialCards) => {
       initialCards.forEach((item) => {
-        renderCard(config, item.name, item.link, item.likes);
+        renderCard(config, item.name, item.link, item.likes, item.owner._id);
       });
     })
     .catch((err) => console.error(err));
 }
 
-export function renderCard({ sectionSelector, ...rest }, place, link, likes) {
+export function renderCard({ sectionSelector, ...rest }, place, link, likes, owner) {
   const section = document.querySelector(sectionSelector);
-  section.prepend(createPost(rest, place, link, likes.length));
+  section.prepend(createPost(rest, place, link, likes.length, owner));
 }
 
 // export function changeProfile(

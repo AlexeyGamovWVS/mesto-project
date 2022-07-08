@@ -76,7 +76,7 @@ function setPostAddSubmitListener(
     evt.preventDefault();
     sendPost(inputPlace.value, inputLink.value)
       .then((res) => {
-        renderCard(config, res.name, res.link, res.likes);
+        renderCard(config, res.name, res.link, res.likes, res.owner._id);
       })
       .catch((err) => console.log(err));
     evt.target.reset();
@@ -125,4 +125,4 @@ getUserInfo(user);
 renderInitialCards(postCreationConfig);
 enableValidation(validateConfig);
 setProfileSubmitListener(profileFormConfig);
-setPostAddSubmitListener(postFormConfig, postCreationConfig);
+setPostAddSubmitListener(postFormConfig, postCreationConfig);  
