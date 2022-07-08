@@ -44,7 +44,7 @@ export const validateConfig = {
 export function renderInitialCards(config) {
   getInitialCards()
     .then((initialCards) => {
-      initialCards.forEach((item) => {
+      initialCards.reverse().forEach((item) => {
         renderCard(config, item.name, item.link, item.likes, item.owner._id, item._id);
       });
     })
