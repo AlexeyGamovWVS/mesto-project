@@ -1,16 +1,17 @@
 import { getInitialCards } from "./api.js";
 import { createPost } from "./card.js";
 
-const karachaevskImage = new URL("../images/karachaevsk.jpeg", import.meta.url);
-const elbrusImage = new URL("../images/elbrus.jpeg", import.meta.url);
-const dombaiImage = new URL("../images/domaby.jpeg", import.meta.url);
-const matternImage = new URL("../images/mattern.jpeg", import.meta.url);
-const serroImage = new URL("../images/serro.jpeg", import.meta.url);
-const rechimeImage = new URL("../images/rechime.jpeg", import.meta.url);
+// const karachaevskImage = new URL("../images/karachaevsk.jpeg", import.meta.url);
+// const elbrusImage = new URL("../images/elbrus.jpeg", import.meta.url);
+// const dombaiImage = new URL("../images/domaby.jpeg", import.meta.url);
+// const matternImage = new URL("../images/mattern.jpeg", import.meta.url);
+// const serroImage = new URL("../images/serro.jpeg", import.meta.url);
+// const rechimeImage = new URL("../images/rechime.jpeg", import.meta.url);
 
 const popupImage = document.querySelector("#post-popup");
 const imagePopup = popupImage.querySelector(".popup__img-item");
 const imageCaption = popupImage.querySelector(".popup__img-caption");
+const deletePopup = document.querySelector("#post-delete-popup");
 
 const postCreationConfig = {
   sectionSelector: ".posts__container",
@@ -26,6 +27,7 @@ const postCreationConfig = {
   popupImage: popupImage,
   imagePopup: imagePopup,
   imageCaption: imageCaption,
+	deletePopup: deletePopup,
 };
 
 export const validateConfig = {

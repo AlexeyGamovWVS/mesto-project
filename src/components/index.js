@@ -32,20 +32,24 @@ const user = {
 // ====== pop-ups ======
 const editPop = document.querySelector("#edit-profile-popup");
 const addPop = document.querySelector("#post-add-popup");
+const profileImagePop = document.querySelector('#edit-profile-image-popup');
 
 // ====== forms & inputs ======
 const profileForm = document.forms.profileEditForm;
 const addPostForm = document.forms.addPostForm;
+const profileImageForm = document.forms.profileImageForm;
 
 const inputName = profileForm.elements.author;
 const inputDescr = profileForm.elements.status;
 const inputPlace = addPostForm.elements.place;
 const inputLink = addPostForm.elements.imgLink;
+const inputProfileImage = profileImageForm.elements.imgProfileLink;
 
 // ====== buttons ======
 const editProfileBtn = document.querySelector("#edit-profile");
 const postAddButton = document.querySelector("#add-btn");
 const closeButtons = document.querySelectorAll(".popup__btn-close");
+const editImageProfileBtn = document.querySelector('.profile__photo-item');
 
 // ====== configs =======
 
@@ -109,6 +113,11 @@ editProfileBtn.addEventListener("click", () => {
   inputDescr.value = profileStatus.textContent;
   resetFormErrors([inputName, inputDescr], validateConfig);
   openPopup(editPop);
+});
+
+editImageProfileBtn.addEventListener("click", () => {
+	resetFormErrors([inputProfileImage], validateConfig);
+	openPopup(profileImagePop);
 });
 
 postAddButton.addEventListener("click", () => {

@@ -28,8 +28,12 @@ export function createPost(config, place, link, likesAmount, owner) {
     config.postBtnLikeActiveClass
   );
 
-  if (owner === 'efe1922996bcc79103e54788') {
-    setDeleteHandler(postElement, config.postBtnDelSelector);
+  if (owner === "efe1922996bcc79103e54788") {
+    setDeleteHandler(
+      postElement,
+      config.postBtnDelSelector,
+      config.deletePopup
+    );
   } else {
     const deleteBtn = postElement.querySelector(config.postBtnDelSelector);
     deleteBtn.setAttribute("disabled", "disabled");
@@ -68,9 +72,12 @@ function setLikeHandler(post, btnSelector, stateClass) {
   });
 }
 
-function setDeleteHandler(post, btnSelector) {
+function setDeleteHandler(post, btnSelector, deletePopup) {
   const deleteBtn = post.querySelector(btnSelector);
-  deleteBtn.addEventListener("click", () => post.remove());
+  deleteBtn.addEventListener("click", () => {
+    openPopup(deletePopup);
+    post.remove();
+  });
 }
 
 function setPopupOpenHandler(
