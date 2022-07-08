@@ -8,15 +8,10 @@ const key = {
   },
 };
 
-export function getUserInfo(config) {
-  fetch(key.userAdress, { headers: key.headers })
-    .then((res) => getResponse(res))
-    .then((data) => {
-      config.userName.textContent = data.name;
-      config.userStatus.textContent = data.about;
-      config.userImage.src = data.avatar;
-    })
-    .catch((err) => console.error(err));
+export function getUserInfo() {
+  return fetch(key.userAdress, { headers: key.headers }).then((res) =>
+    getResponse(res)
+  );
 }
 
 export function getInitialCards() {
@@ -40,9 +35,7 @@ export function deletePost(cardId) {
   return fetch(`${key.cardsAdress}/${cardId}`, {
     method: "DELETE",
     headers: key.headers,
-  })
-    .then((res) => getResponse(res))
-    .catch((err) => console.log(err));
+  }).then((res) => getResponse(res));
 }
 
 export function sendUserData(userName, userAbout) {
@@ -60,7 +53,9 @@ export function sendLike(cardId) {
   return fetch(`${key.cardsAdress}/likes/${cardId}`, {
     method: "PUT",
     headers: key.headers,
-  }).then((res) => getResponse(res));
+  })
+    .then((res) => getResponse(res))
+    .catch((err) => console.log(err));
 }
 
 export function deleteLike(cardId) {

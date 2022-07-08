@@ -13,7 +13,7 @@ import {
   renderInitialCards,
   postCreationConfig,
   validateConfig,
-	renderLoading,
+  renderLoading,
   //  changeProfile,
 } from "./utils.js";
 
@@ -95,11 +95,11 @@ function setPostAddSubmitListener(
       })
       .catch((err) => console.log(err))
       .finally(() => {
-				renderLoading(true, submitBtn);
-				evt.target.reset();
-				toggleButtonState(form, submitBtn, stateClass);
-				closePopup(popup);
-			});
+        renderLoading(true, submitBtn);
+        evt.target.reset();
+        toggleButtonState(form, submitBtn, stateClass);
+        closePopup(popup);
+      });
   });
 }
 
@@ -116,13 +116,19 @@ function setProfileSubmitListener({
     renderLoading(false, submitBtn);
     sendUserData(inputName.value, inputDescr.value)
       .then(() => {
-        getUserInfo(user);
+        getUserInfo()
+          .then((data) => {
+            user.userName.textContent = data.name;
+            user.userStatus.textContent = data.about;
+            user.userImage.src = data.avatar;
+          })
+          .catch((err) => console.error(err));
       })
       .catch((err) => console.error(err))
       .finally(() => {
-				renderLoading(false, submitBtn);
-				closePopup(popup);
-			});
+        renderLoading(false, submitBtn);
+        closePopup(popup);
+      });
   });
 }
 
@@ -132,14 +138,22 @@ function setProfileImageFormListener(config) {
     evt.preventDefault();
     renderLoading(true, submitBtn);
     sendUserPhoto(config.input.value)
-      .then(() => getUserInfo(user))
+      .then(() => {
+        getUserInfo()
+          .then((data) => {
+            user.userName.textContent = data.name;
+            user.userStatus.textContent = data.about;
+            user.userImage.src = data.avatar;
+          })
+          .catch((err) => console.error(err));
+      })
       .catch((err) => console.log(err))
       .finally(() => {
-				renderLoading(false, submitBtn);
-				evt.target.reset();
-				toggleButtonState(config.form, submitBtn, config.stateClass);
-				closePopup(config.popup);
-			});
+        renderLoading(false, submitBtn);
+        evt.target.reset();
+        toggleButtonState(config.form, submitBtn, config.stateClass);
+        closePopup(config.popup);
+      });
   });
 }
 
@@ -167,7 +181,14 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
-getUserInfo(user);
+getUserInfo()
+  .then((data) => {
+    user.userName.textContent = data.name;
+    user.userStatus.textContent = data.about;
+    user.userImage.src = data.avatar;
+  })
+  .catch((err) => console.error(err));
+
 renderInitialCards(postCreationConfig);
 enableValidation(validateConfig);
 setProfileSubmitListener(profileFormConfig);
