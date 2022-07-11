@@ -11,15 +11,12 @@ function closePopup(popup) {
 }
 
 function closePopupByOverlay(evt) {
-  const activePop = document.querySelector(".popup_opened");
-  if (evt.target.classList.contains("popup")) {
-    closePopup(activePop);
-  }
+  closePopup(evt.target);
 }
 
 function closePopupByEsc(evt) {
-  const activePop = document.querySelector(".popup_opened");
   if (evt.key === "Escape") {
+		const activePop = document.querySelector(".popup_opened");
     closePopup(activePop);
   }
 }
