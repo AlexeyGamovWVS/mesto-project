@@ -17,17 +17,25 @@ import {
   //  changeProfile,
 } from "./utils.js";
 
-import { getUserInfo, sendPost, sendUserData, sendUserPhoto } from "./api.js";
+import {
+  getInitialCards,
+  getUserInfo,
+  sendPost,
+  sendUserData,
+  sendUserPhoto,
+} from "./api.js";
 
 // ====== DOM Elements for changing ======
 const profileName = document.querySelector(".profile__name");
 const profileStatus = document.querySelector(".profile__status");
 const profileImage = document.querySelector(".profile__photo-item");
+let userId;
 
 const user = {
   userName: profileName,
   userStatus: profileStatus,
   userImage: profileImage,
+	userId: userId
 };
 
 // ====== pop-ups ======
@@ -189,7 +197,19 @@ getUserInfo()
   })
   .catch((err) => console.error(err));
 
-renderInitialCards(postCreationConfig);
+Promise.all([getUserInfo(), getInitialCards()])
+  .then(([profile, cards]) => {
+    user.userName.textContent = profile.name;
+    user.userStatus.textContent = profile.about;
+    user.userImage.src = profile.avatar;
+		user.userId = profile._id;
+		postCreationConfig.userId = user.userId;
+		renderInitialCards(postCreationConfig, cards);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
 enableValidation(validateConfig);
 setProfileSubmitListener(profileFormConfig);
 setPostAddSubmitListener(postFormConfig, postCreationConfig);

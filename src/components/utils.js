@@ -21,14 +21,14 @@ const postCreationConfig = {
   postBtnLikeSelector: ".post__btn-like",
   postBtnLikeActiveClass: "post__btn-like_active",
   postBtnDelSelector: ".post__delete",
-	postBtnDelConfirmSelector: ".form__btn-save_type_delete",
-	postLikeAmountSelector: ".post__like-amount",
-	postLikeAmountHiddenClass: "post__like-amount_hidden",
+  postBtnDelConfirmSelector: ".form__btn-save_type_delete",
+  postLikeAmountSelector: ".post__like-amount",
+  postLikeAmountHiddenClass: "post__like-amount_hidden",
   postTemplateId: "#post",
   popupImage: popupImage,
   imagePopup: imagePopup,
   imageCaption: imageCaption,
-	deletePopup: deletePopup,
+  deletePopup: deletePopup,
 };
 
 export const validateConfig = {
@@ -41,17 +41,27 @@ export const validateConfig = {
   labelSelector: ".form__field",
 };
 
-export function renderInitialCards(config) {
-  getInitialCards()
-    .then((initialCards) => {
-      initialCards.reverse().forEach((item) => {
-        renderCard(config, item.name, item.link, item.likes, item.owner._id, item._id);
-      });
-    })
-    .catch((err) => console.error(err));
+export function renderInitialCards(config, cards) {
+  cards.reverse().forEach((item) => {
+    renderCard(
+      config,
+      item.name,
+      item.link,
+      item.likes,
+      item.owner._id,
+      item._id
+    );
+  });
 }
 
-export function renderCard({ sectionSelector, ...rest }, place, link, likes, owner, postId) {
+export function renderCard(
+  { sectionSelector, ...rest },
+  place,
+  link,
+  likes,
+  owner,
+  postId
+) {
   const section = document.querySelector(sectionSelector);
   section.prepend(createPost(rest, place, link, likes, owner, postId));
 }

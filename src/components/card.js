@@ -2,6 +2,7 @@ import { deleteLike, deletePost, sendLike } from "./api.js";
 import { closePopup, openPopup } from "./modal.js";
 
 export function createPost(config, place, link, likes, owner, postId) {
+	const myId = config.userId;
   const postElement = getTemplate(
     config.postTemplateId,
     config.postElementSelector
@@ -21,7 +22,8 @@ export function createPost(config, place, link, likes, owner, postId) {
     likes,
     postElement,
     config.postBtnLikeSelector,
-    config.postBtnLikeActiveClass
+    config.postBtnLikeActiveClass,
+		myId
   );
 
   updateLikesAmount(
@@ -36,7 +38,8 @@ export function createPost(config, place, link, likes, owner, postId) {
     config.deletePopup,
     config.postBtnDelConfirmSelector,
     postId,
-    owner
+    owner,
+		myId
   );
 
   setLikeHandler(
@@ -65,17 +68,17 @@ function getTemplate(postId, postSelector) {
   return postElement;
 }
 
-function updateLikeStatus(likes, post, btnSelector, classActive) {
-  if (isLiked(likes)) {
+function updateLikeStatus(likes, post, btnSelector, classActive, myId) {
+  if (isLiked(likes, myId)) {
     post.querySelector(btnSelector).classList.add(classActive);
     return;
   }
   post.querySelector(btnSelector).classList.remove(classActive);
 }
 
-function isLiked(likes) {
+function isLiked(likes, myId) {
   const isMyLike = likes.some((item) => {
-    return item._id === "efe1922996bcc79103e54788";
+    return item._id === myId;
   });
   return isMyLike;
 }
@@ -99,10 +102,11 @@ function setDeleteHandler(
   deletePopup,
   confirmBtnSelector,
   postId,
-  owner
+  owner,
+	myId
 ) {
   const deleteBtn = post.querySelector(btnSelector);
-  if (owner === "efe1922996bcc79103e54788") {
+  if (owner === myId) {
     deleteBtn.addEventListener("click", () => {
       const submitDelBtn = deletePopup.querySelector(confirmBtnSelector);
       openPopup(deletePopup);

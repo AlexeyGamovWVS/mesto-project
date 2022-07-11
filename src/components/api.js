@@ -54,8 +54,7 @@ export function sendLike(cardId) {
     method: "PUT",
     headers: key.headers,
   })
-    .then((res) => getResponse(res))
-    .catch((err) => console.log(err));
+    .then((res) => getResponse(res));
 }
 
 export function deleteLike(cardId) {
