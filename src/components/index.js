@@ -100,14 +100,16 @@ function setPostAddSubmitListener(
     sendPost(inputPlace.value, inputLink.value)
       .then((res) => {
         renderCard(config, res.name, res.link, res.likes, res.owner._id);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        renderLoading(true, submitBtn);
+        closePopup(popup);
         evt.target.reset();
         toggleButtonState(form, submitBtn, stateClass);
-        closePopup(popup);
-      });
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+			.finally(() => {
+				renderLoading(false, submitBtn);
+			});
   });
 }
 
@@ -121,22 +123,20 @@ function setProfileSubmitListener({
   const submitBtn = form.querySelector(submitSelector);
   form.addEventListener("submit", (evt) => {
     evt.preventDefault();
-    renderLoading(false, submitBtn);
+    renderLoading(true, submitBtn);
     sendUserData(inputName.value, inputDescr.value)
-      .then(() => {
-        getUserInfo()
-          .then((data) => {
-            user.userName.textContent = data.name;
-            user.userStatus.textContent = data.about;
-            user.userImage.src = data.avatar;
-          })
-          .catch((err) => console.error(err));
-      })
-      .catch((err) => console.error(err))
-      .finally(() => {
-        renderLoading(false, submitBtn);
+      .then((data) => {
+        user.userName.textContent = data.name;
+        user.userStatus.textContent = data.about;
+        user.userImage.src = data.avatar;
         closePopup(popup);
-      });
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+			.finally(() => {
+				renderLoading(false, submitBtn);
+			});
   });
 }
 
@@ -150,14 +150,16 @@ function setProfileImageFormListener(config) {
         user.userName.textContent = data.name;
         user.userStatus.textContent = data.about;
         user.userImage.src = data.avatar;
-      })
-      .catch((err) => console.error(err))
-      .finally(() => {
-        renderLoading(false, submitBtn);
-        evt.target.reset();
+				evt.target.reset();
         toggleButtonState(config.form, submitBtn, config.stateClass);
         closePopup(config.popup);
-      });
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+			.finally(() => {
+				renderLoading(false, submitBtn);
+			});
   });
 }
 
