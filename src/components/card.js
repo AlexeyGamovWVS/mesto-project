@@ -2,7 +2,7 @@ import { deleteLike, deletePost, sendLike } from "./api.js";
 import { closePopup, openPopup } from "./modal.js";
 
 export function createPost(config, place, link, likes, owner, postId) {
-	const myId = config.userId;
+  const myId = config.userId;
   const postElement = getTemplate(
     config.postTemplateId,
     config.postElementSelector
@@ -23,7 +23,7 @@ export function createPost(config, place, link, likes, owner, postId) {
     postElement,
     config.postBtnLikeSelector,
     config.postBtnLikeActiveClass,
-		myId
+    myId
   );
 
   updateLikesAmount(
@@ -39,10 +39,9 @@ export function createPost(config, place, link, likes, owner, postId) {
     config.postBtnDelConfirmSelector,
     postId,
     owner,
-		myId
+    myId
   );
-	
-	console.log(postId);
+
   setLikeHandler(
     postElement,
     config.postBtnLikeSelector,
@@ -90,7 +89,11 @@ function updateLikesAmount(amount, amountBox, stateClass) {
 }
 
 function checkLikeAmount(amountBox, stateClass) {
-  if (amountBox.textContent === "0" || amountBox.textContent === 0 || amountBox.textContent === '') {
+  if (
+    amountBox.textContent === "0" ||
+    amountBox.textContent === 0 ||
+    amountBox.textContent === ""
+  ) {
     amountBox.classList.add(stateClass);
     return;
   }
@@ -104,21 +107,26 @@ function setDeleteHandler(
   confirmBtnSelector,
   postId,
   owner,
-	myId
+  myId
 ) {
   const deleteBtn = post.querySelector(btnSelector);
+
   if (owner === myId) {
     deleteBtn.addEventListener("click", () => {
       const submitDelBtn = deletePopup.querySelector(confirmBtnSelector);
       openPopup(deletePopup);
-      submitDelBtn.addEventListener("click", () => {
-        deletePost(postId);
-        closePopup(deletePopup);
-        post.remove();
-      });
+      submitDelBtn.onclick = function () {
+        deletePost(postId)
+          .then(() => {
+            closePopup(deletePopup);
+            post.remove();
+          })
+          .catch((res) => console.error(res));
+      };
     });
     return;
   }
+
   deleteBtn.setAttribute("disabled", "disabled");
   deleteBtn.style.display = "none";
 }
