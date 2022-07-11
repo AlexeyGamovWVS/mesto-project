@@ -35,7 +35,7 @@ const user = {
   userName: profileName,
   userStatus: profileStatus,
   userImage: profileImage,
-	userId: userId
+  userId: userId,
 };
 
 // ====== pop-ups ======
@@ -146,16 +146,12 @@ function setProfileImageFormListener(config) {
     evt.preventDefault();
     renderLoading(true, submitBtn);
     sendUserPhoto(config.input.value)
-      .then(() => {
-        getUserInfo()
-          .then((data) => {
-            user.userName.textContent = data.name;
-            user.userStatus.textContent = data.about;
-            user.userImage.src = data.avatar;
-          })
-          .catch((err) => console.error(err));
+      .then((data) => {
+        user.userName.textContent = data.name;
+        user.userStatus.textContent = data.about;
+        user.userImage.src = data.avatar;
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
       .finally(() => {
         renderLoading(false, submitBtn);
         evt.target.reset();
@@ -189,22 +185,14 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closePopup(popup));
 });
 
-getUserInfo()
-  .then((data) => {
-    user.userName.textContent = data.name;
-    user.userStatus.textContent = data.about;
-    user.userImage.src = data.avatar;
-  })
-  .catch((err) => console.error(err));
-
 Promise.all([getUserInfo(), getInitialCards()])
   .then(([profile, cards]) => {
     user.userName.textContent = profile.name;
     user.userStatus.textContent = profile.about;
     user.userImage.src = profile.avatar;
-		user.userId = profile._id;
-		postCreationConfig.userId = user.userId;
-		renderInitialCards(postCreationConfig, cards);
+    user.userId = profile._id;
+    postCreationConfig.userId = user.userId;
+    renderInitialCards(postCreationConfig, cards);
   })
   .catch((err) => {
     console.error(err);
