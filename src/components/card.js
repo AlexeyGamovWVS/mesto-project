@@ -41,7 +41,8 @@ export function createPost(config, place, link, likes, owner, postId) {
     owner,
 		myId
   );
-
+	
+	console.log(postId);
   setLikeHandler(
     postElement,
     config.postBtnLikeSelector,
@@ -89,7 +90,7 @@ function updateLikesAmount(amount, amountBox, stateClass) {
 }
 
 function checkLikeAmount(amountBox, stateClass) {
-  if (amountBox.textContent === "0" || amountBox.textContent === 0) {
+  if (amountBox.textContent === "0" || amountBox.textContent === 0 || amountBox.textContent === '') {
     amountBox.classList.add(stateClass);
     return;
   }

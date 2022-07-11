@@ -99,7 +99,7 @@ function setPostAddSubmitListener(
     renderLoading(true, submitBtn);
     sendPost(inputPlace.value, inputLink.value)
       .then((res) => {
-        renderCard(config, res.name, res.link, res.likes, res.owner._id);
+        renderCard(config, res.name, res.link, res.likes, res.owner._id, res._id);
         closePopup(popup);
         evt.target.reset();
         toggleButtonState(form, submitBtn, stateClass);
@@ -195,12 +195,11 @@ Promise.all([getUserInfo(), getInitialCards()])
     user.userId = profile._id;
     postCreationConfig.userId = user.userId;
     renderInitialCards(postCreationConfig, cards);
+		enableValidation(validateConfig);
+		setProfileSubmitListener(profileFormConfig);
+		setPostAddSubmitListener(postFormConfig, postCreationConfig);
+		setProfileImageFormListener(profileImageFormConfig);
   })
   .catch((err) => {
-    console.error(err);
+    console.error(`${err} Отказано в доступе или умер сервер`);
   });
-
-enableValidation(validateConfig);
-setProfileSubmitListener(profileFormConfig);
-setPostAddSubmitListener(postFormConfig, postCreationConfig);
-setProfileImageFormListener(profileImageFormConfig);
